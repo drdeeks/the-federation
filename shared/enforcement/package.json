@@ -1,0 +1,8 @@
+{
+  "name": "@mycelium-collective/shared-enforcement",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Reusable fail-closed enforcement gate (reuses Character Kit). ESM scoped package.",
+  "main": "fail-closed-gate.js",
+  "private": true
+}

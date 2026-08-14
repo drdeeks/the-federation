@@ -1,0 +1,28 @@
+{
+  "name": "@drdeeks/character-kit-watchtower-bridge",
+  "version": "0.1.0",
+  "description": "Translator bridge between Character Kit (local enforcement) and Federation Watchtower (federation/observability). The bridge owns no policy; it normalizes enforcement activity into Watchtower events and Watchtower results into adapter-visible state.",
+  "type": "module",
+  "license": "MIT",
+  "author": "drdeeks",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "node --import tsx --test tests/*.test.ts tests/**/*.test.ts",
+    "validate": "tsc -p tsconfig.json --noEmit",
+    "start-dev": "node --loader ts-node/esm scripts/start-dev.ts"
+  },
+  "dependencies": {
+    "@federation-watchtower/sdk": "^0.2.0",
+    "tsx": "^4.23.12"
+  },
+  "peerDependencies": {
+    "@drdeeks/character-kit": "^1.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.9.3"
+  }
+}

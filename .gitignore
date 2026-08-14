@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.log
+.trash/
+deadweight/
+coverage/
+.DS_Store

@@ -1,0 +1,8 @@
+{
+  "name": "@mycelium-collective/shared-memory",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Extracted, scrubbed memory core (mnemosyne) — ESM scoped package.",
+  "main": "index.js",
+  "private": true
+}

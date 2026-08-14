@@ -1,0 +1,41 @@
+# .gitignore — character-kit-watchtower-bridge
+
+# Dependencies
+node_modules/
+.pnpm-store/
+.yarn/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+*.tsbuildinfo.*
+
+# Test / coverage artifacts
+coverage/
+.nyc_output/
+*.lcov
+test-results/
+
+# Environment / secrets — NEVER commit real secrets
+.env
+.env.*
+!.env.example
+*.local
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+
+# Editor / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local dev scratch (trash > purge; keep recoverable)
+.scratch/
+.tmp/
