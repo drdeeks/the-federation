@@ -130,6 +130,44 @@ model safety, and Federation-owned credential and webhook management
 remain incomplete. Keep product direction ambitious and implementation claims
 factual.
 
+**2026-08-15 — PHASE-1 (Cognitive Memory Substrate) gated.** Produced
+`src/memory/README.md`, real (not placeholder) `tests/memory-isolation.test.mjs`,
+and an independent review at `review-phase1.md`. Findings from this pass,
+recorded honestly per this document's own change-workflow rule (`update the
+canonical status document when facts change`):
+
+- **Real bug found and fixed**: `src/memory/retrieval/embedding-engine.js`
+  was a 376-line file, 374 lines identical to
+  `shared/memory/engines/embedding-engine.js` (only two comment-header
+  lines differed) — a silent duplicate implementation, in direct violation
+  of `shared/memory/README.md`'s own stated rule ("must not maintain a
+  silent duplicate implementation"). No importer referenced this file
+  anywhere in the repo (checked via grep before touching it), so it was
+  dead weight, not something anything actually depended on breaking.
+  Collapsed to the same two-line re-export shim pattern every sibling
+  adapter (`store/memory-store.js`, `intake/ingestion.js`,
+  `retrieval/recall-engine.js`, `consolidation/pattern-detector.js`,
+  `consolidation/forget-policy.js`) already used correctly.
+  `tests/memory-isolation.test.mjs`'s first test is now a permanent
+  regression guard against this exact class of drift.
+- **Confirmed, not newly discovered**: `docs/MEMORY-ARCHITECTURE.md` §11
+  already honestly listed episodic, declarative/long-term, knowledge-graph,
+  Memory Router, and Context Composer as "not yet integrated." Verified
+  directly against the filesystem — `src/memory/episodic/`,
+  `src/memory/working/`, `src/memory/persistent/`, and
+  `src/memory/schemas/` are genuinely empty directories, zero files. The
+  isolation test file skips the corresponding blueprint acceptance tests
+  (TEST-004 through TEST-007, TEST-011) explicitly, each with the exact
+  missing module named, rather than faking a pass or omitting them
+  silently — MOD-002's PARTIAL status in `blueprint.md` is accurate, not
+  overclaimed.
+- **What is real and tested**: the `shared/memory/` ↔ `src/memory/`
+  re-export boundary (no duplication, no reverse dependency from the
+  engine into the application layer), and the document indexer's
+  agent-internal exclusion (`memory/`, `knowledge/`, `.secrets/`,
+  `habits/` never enter the corpus index — TEST-008), both verified with
+  real fixtures, not mocked assertions.
+
 ## Verification
 
 Run commands only inside this repository or `adapter/`:

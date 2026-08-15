@@ -21,3 +21,111 @@ Phase       : PHASE-0
 Rollback Ref: N/A — initial document creation
 ```
 
+## CL-0001 — PHASE-0 gated: architecture doc, independent review, chain-enforcement automation
+
+```
+Date        : 2026-08-15 08:20 UTC
+Contributor : Claude (federation-architect role for deliverables; federation-qa
+              role, a genuinely independent subagent, for the review)
+Modules     : [MOD-001, MOD-011]
+Section Tags: [[PHASE-0-v1]]
+Files Changed: [docs/hackathon/architecture.md (new), review-phase0.md (new),
+              .gate.json (new), .monitor.json (new), .monitor-state.json (new),
+              .blueprint-chain/run-current-phase-gate.sh (new),
+              .blueprint-chain/poll-forever.sh (new), plus committing the
+              pre-existing but previously-uncommitted blueprint apparatus
+              (blueprint.md, checklist.md, AGENTS.md, project.json,
+              assignments.json, checklist-data.json, .blueprint-chain/,
+              .blueprint-lock.json, .chain/, several docs/*.md files) into
+              git history for the first time]
+Description : Wrote docs/hackathon/architecture.md (PHASE-0.4), synthesized
+              from blueprint.md's own Part I/II/§4.1/§4.6/§5.3 content, not
+              new invention. Independent review (PHASE-0.5) performed by a
+              separate subagent acting as "federation-qa" -- distinct from
+              the phase's assigned "federation-architect"; the validator
+              programmatically rejects a reviewer matching the assignee, so
+              this could not be faked under one identity. The review found
+              a real accuracy problem in the architecture doc's first draft
+              (unsupported MOD-001/MOD-003 labels attached to Federation
+              Watchtower's credential/webhook work, true from unrelated
+              same-day work in a sibling repo but not something blueprint.md
+              or docs/INTEGRATION_MAP.md actually states) -- corrected
+              before this entry. Set up watcher+gate automation via the
+              guardrail-enforcement skill: a file_mtime watcher over
+              docs/**, src/**, shared/**, tests/**, and review-phase*.md
+              fires a gate that re-runs whichever phase is currently
+              first-failing and appends an HMAC-signed, hash-chained log
+              entry on a genuine pass. A polling loop (custom
+              poll-forever.sh, not the skill's own watchdog.sh, which
+              assumes a different directory layout) is running detached in
+              the background for this session -- not installed as a
+              persistent systemd service, which remains a separate,
+              sudo-requiring decision not taken unilaterally. Also brought
+              the entire pre-existing blueprint scaffolding into git history
+              for the first time, since it existed only on disk and was at
+              the same kind of loss risk an uncommitted /tmp working copy
+              turned out to have earlier the same day. A large, unrelated
+              body of pre-existing uncommitted modifications/deletions/
+              renames in this repo (README.md, api/* -> src/* restructuring,
+              several docs/*.md edits) predates this session and was
+              deliberately left uncommitted -- not part of this entry.
+Tests Passing: PHASE-0 validator (.blueprint-chain/validators/validate_phase0_blueprint.py)
+              — OK: Phase 0 validation passed (all 5 deliverables present,
+              review well-formed and independent)
+Phase       : PHASE-0
+Rollback Ref: commit 3e5dcb5 (federation-society-hardening... this repo,
+              ~/projects/hackathon) — revert via git revert if needed;
+              blueprint.md itself untouched, no rollback needed there
+```
+
+## CL-0002 — PHASE-1 gated: memory subsystem docs, real isolation tests, a duplicate found and fixed
+
+```
+Date        : 2026-08-15 09:05 UTC
+Contributor : Claude (federation-memory role for deliverables; federation-architect
+              role, independent, for the review)
+Modules     : [MOD-002]
+Section Tags: [[PHASE-1-v1]]
+Files Changed: [src/memory/README.md (new), tests/memory-isolation.test.mjs
+              (new), review-phase1.md (new),
+              src/memory/retrieval/embedding-engine.js (fixed — collapsed a
+              376-line silent duplicate to a 2-line re-export shim),
+              AGENTS.md (documented the duplicate-file finding under
+              "Current implementation truth")]
+Description : Wrote src/memory/README.md documenting the shared/memory
+              (engine) vs src/memory (Federation application layer)
+              boundary and an honest table of what's real vs empty in
+              src/memory/'s subdirectories. Wrote
+              tests/memory-isolation.test.mjs with 3 real, executing tests
+              (adapter modules are re-export shims not duplicates; the
+              shared engine never imports back into src/; the document
+              indexer genuinely excludes memory/knowledge/.secrets/habits
+              from the corpus, exercised against real temp-directory
+              fixtures, not mocks) and 5 explicit test.skip(...) entries
+              for blueprint acceptance tests that cannot be verified yet
+              because the subsystem doesn't exist (episodic, declarative,
+              knowledge-graph, Memory Router/Context Composer are all still
+              empty directories, confirmed directly against the
+              filesystem) -- each skip names the exact missing module,
+              not a silent omission. Found and fixed a real, previously
+              undocumented bug while building the first test: 
+              src/memory/retrieval/embedding-engine.js was a 376-line file,
+              374 lines identical to
+              shared/memory/engines/embedding-engine.js, silently violating
+              this repo's own no-duplicate rule. No importer referenced it
+              anywhere (checked before touching it). Collapsed to the same
+              shim pattern its siblings already used correctly; the first
+              isolation test is now a permanent regression guard against
+              this exact class of drift. Full finding recorded in
+              AGENTS.md's "Current implementation truth" section per this
+              project's own change-workflow rule.
+Tests Passing: node --test tests/memory-isolation.test.mjs — 3 passed, 0
+              failed, 5 skipped (each with a named reason). PHASE-1
+              validator — OK: Phase 1 validation passed.
+Phase       : PHASE-1
+Rollback Ref: revert via git revert on this entry's commit; the
+              embedding-engine.js fix is independently revertible (restore
+              the prior 376-line file from git history) without affecting
+              the test or README changes
+```
+

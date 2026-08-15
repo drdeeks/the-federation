@@ -1,7 +1,7 @@
 import fs from "fs/promises";
 import fssync from "fs";
 import path from "path";
-import matter from "gray-matter";
+import { parseFrontmatter } from "./frontmatter.js";
 
 // ─── Agent-internal exclusion ────────────────────────────────────────────────
 //
@@ -278,7 +278,7 @@ export class DocumentIndexer {
   async indexFile(filePath, options = {}) {
     const absPath = path.resolve(filePath);
     const content = await fs.readFile(absPath, "utf-8");
-    const { data: existingFrontmatter, content: body } = matter(content);
+    const { data: existingFrontmatter, content: body } = parseFrontmatter(content);
     const stat = await fs.stat(absPath);
     const contentHash = String(stat.mtimeMs);
 

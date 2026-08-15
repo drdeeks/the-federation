@@ -3,8 +3,8 @@
  *
  * Coordinates IngestionEngine, RecallEngine, ForgetEngine, and LearningEngine
  * via dependency injection. Provides the unified interface used by the API layer.
- * Rollback Tag: [MEMORY-AGENT-v1]
- * Phase: 4 — API Layer & Integration
+ * Integration status: legacy application scaffold; not yet wired into the Federation runtime
+ * This module remains outside the verified smoke path until its runtime dependencies are restored.
  */
 
 import { randomUUID } from 'crypto';

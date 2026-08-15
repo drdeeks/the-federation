@@ -41,10 +41,11 @@
   "file_mtime::/home/drdeek/projects/hackathon/src/api/middleware/request-logger.js": 1783679799.0,
   "file_mtime::/home/drdeek/projects/hackathon/src/api/middleware/validate.js": 1783679799.0,
   "file_mtime::/home/drdeek/projects/hackathon/src/api/router.js": 1786716508.647794,
+  "file_mtime::/home/drdeek/projects/hackathon/src/memory/README.md": 1786816101.1769521,
   "file_mtime::/home/drdeek/projects/hackathon/src/memory/consolidation/forget-policy.js": 1786730674.966826,
   "file_mtime::/home/drdeek/projects/hackathon/src/memory/consolidation/pattern-detector.js": 1786730674.9672303,
   "file_mtime::/home/drdeek/projects/hackathon/src/memory/intake/ingestion.js": 1786730674.9676251,
-  "file_mtime::/home/drdeek/projects/hackathon/src/memory/retrieval/embedding-engine.js": 1786716508.7337973,
+  "file_mtime::/home/drdeek/projects/hackathon/src/memory/retrieval/embedding-engine.js": 1786815961.458748,
   "file_mtime::/home/drdeek/projects/hackathon/src/memory/retrieval/recall-engine.js": 1786730674.966402,
   "file_mtime::/home/drdeek/projects/hackathon/src/memory/retrieval/semantic-retriever.js": 1786716080.6797569,
   "file_mtime::/home/drdeek/projects/hackathon/src/memory/semantic/document-indexer.js": 1786730921.7593238,
@@ -52,5 +53,6 @@
   "file_mtime::/home/drdeek/projects/hackathon/src/memory/store/db/migrations.js": 1783679799.0,
   "file_mtime::/home/drdeek/projects/hackathon/src/memory/store/db/migrations/20260704_001_create_memories_table.sql": 1783679799.0,
   "file_mtime::/home/drdeek/projects/hackathon/src/memory/store/db/migrations/20260704_002_create_memory_embeddings_table.sql": 1783679799.0,
-  "file_mtime::/home/drdeek/projects/hackathon/src/memory/store/memory-store.js": 1786730674.965783
+  "file_mtime::/home/drdeek/projects/hackathon/src/memory/store/memory-store.js": 1786730674.965783,
+  "file_mtime::/home/drdeek/projects/hackathon/tests/memory-isolation.test.mjs": 1786816070.6423812
 }
