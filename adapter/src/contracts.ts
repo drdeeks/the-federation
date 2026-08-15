@@ -77,6 +77,23 @@ export interface BridgeConfig {
   watchtowerGateway: string;
   watchtowerIngestionSecret: string;
   watchtowerProducer: string;
+  /**
+   * Canonical fw_agent_* credential (MOD-004). Optional: when absent, the
+   * bridge behaves exactly as it always has -- legacy producer-signed HMAC
+   * only, zero regression. When present, watchtower.ts routes
+   * connect/heartbeat/emit/disconnect through FederationAgentClient
+   * instead. Never the shared ingestion secret's replacement for the four
+   * routes that still have no canonical bearer path (lease validate, tool
+   * authorize, validation gates, commands) -- those stay legacy-only until
+   * Federation ships MOD-002 canonically, which the adapter cannot control.
+   */
+  watchtowerAgentToken?: string;
+  /**
+   * Canonical fw_owner_* credential (MOD-004). Optional, used only for
+   * one-time owner/agent bootstrap (FederationOwnerClient.registerAgent),
+   * not part of the steady-state emit/heartbeat path.
+   */
+  watchtowerOwnerToken?: string;
   projectId: string;
   agentId: string;
   maxRetries: number;

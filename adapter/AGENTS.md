@@ -160,6 +160,24 @@ Each file's "must not contain" list is in the build blueprint. Honor it.
   same pass: `package.json`'s `test` script was missing `--import tsx`, so
   `npm test` failed outright on this Node version (22.23.2) — the previously
   recorded "12/12 pass" wasn't reproducible via the documented command.
+- 2026-08-14 — **Phase 3 correction closed, partially:** `watchtower.ts` now
+  wires `FederationAgentClient` (canonical `fw_agent_*`) for
+  connect/heartbeat/events/disconnect, additive alongside the legacy
+  `WatchtowerClient` (used when `BridgeConfig.watchtowerAgentToken` is
+  configured; absent, behavior unchanged from before this entry). Owner
+  creation/agent registration bootstrap and canonical lease request remain
+  genuinely not done — see updated `docs/FEDERATION_ROUTE_MAP.md` for the
+  precise remaining gap. `adapter.ts`'s `bridge.start()`/`stop()` (previously
+  no-op) now call the new `connect()`/`disconnect()` handle methods.
+  **Tests: 27/27 unit pass** (`tests/watchtower.test.ts`, new, 4 tests,
+  fetch injected via the SDK's own `fetch` option, no real network — plus 3
+  new `config.test.ts` cases for the optional token fields);
+  `tsc --noEmit` clean. **No live integration test against a real running
+  Federation instance** — none was available this session; still an open
+  gap, same category as the Character Kit daemon integration gap below.
+  Working copy for this pass: `/tmp/federation-adapters-work-20260814` (not
+  the tracked repo at the time of writing — bring these changes into
+  `~/projects/federation-adapters` as a deliberate, separate step).
 
 ## 9. KNOWN GAPS (do not claim these work)
 
@@ -173,13 +191,21 @@ Each file's "must not contain" list is in the build blueprint. Honor it.
 
 ## 10. NEXT STEPS
 
-- [ ] **Wire the canonical Watchtower path** (Phase 3, real remaining work):
-      `FederationOwnerClient`/`FederationAgentClient` for owner creation,
-      agent registration, connect/heartbeat/events/disconnect, and lease
-      request — all canonical-capable per `docs/FEDERATION_ROUTE_MAP.md`.
-      Needs a `fw_owner_*`/`fw_agent_*` credential concept in
-      `config.ts`/`contracts.ts`, distinct from today's single
-      `watchtowerIngestionSecret`.
+- [x] **Wire the canonical Watchtower path for connect/heartbeat/events/
+      disconnect** (2026-08-14) — `FederationAgentClient`, additive
+      alongside legacy `WatchtowerClient`, `fw_agent_*`/`fw_owner_*`
+      concept added to `config.ts`/`contracts.ts`
+      (`watchtowerAgentToken`/`watchtowerOwnerToken`, optional).
+- [ ] **Owner creation + agent registration bootstrap** — nothing calls
+      `FederationOwnerClient.createOwner()`/`registerAgent()` yet. Needs a
+      real setup/onboarding flow, plus the one-time-plaintext-then-
+      encrypted handling for the returned tokens (same pattern as any
+      other generated secret in this ecosystem).
+- [ ] **Canonical lease request** — `FederationAgentClient` has no
+      `requestLease` method in the SDK at all; not possible to wire
+      canonically until the SDK adds one. Legacy `WatchtowerClient.
+      requestLease()` remains uncalled by this bridge either way (was true
+      before this pass too).
 - [ ] Four routes (lease validate, tool authorize, validation gates,
       commands) have no canonical bearer path on Federation's side yet —
       that's Federation's gap, not this adapter's; a fully-canonical

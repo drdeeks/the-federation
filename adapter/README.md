@@ -3,7 +3,7 @@
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](../LICENSE)
 [![Node](https://img.shields.io/badge/node-%3E%3D20-339933?logo=node.js&logoColor=white)](package.json)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](tsconfig.json)
-[![Unit tests](https://img.shields.io/badge/unit%20tests-12%2F12%20passing-brightgreen)](tests/)
+[![Unit tests](https://img.shields.io/badge/unit%20tests-27%2F27%20passing-brightgreen)](tests/)
 [![Status](https://img.shields.io/badge/status-not%20production--ready-orange)](docs/ADAPTER_SPEC_SHEET.md)
 
 > A translator between two independent primitives. It owns no policy.
@@ -55,7 +55,7 @@ Enforced in `src/failure.ts`; asserted by `tests/adapter-roundtrip.test.ts` and
 
 ## Status — what is proven vs. not
 
-**Proven (20/20 unit tests pass, `tsc --noEmit` clean):**
+**Proven (27/27 unit tests pass, `tsc --noEmit` clean):**
 
 - Config resolution (fail-closed on missing secret).
 - Normalized event construction (unique `event_id`, sane defaults).
@@ -72,11 +72,24 @@ Enforced in `src/failure.ts`; asserted by `tests/adapter-roundtrip.test.ts` and
   are each tested end-to-end against a fake daemon speaking that exact
   protocol (`tests/character-kit.test.ts`), including auth-token rejection
   and unreachable-socket fail-closed paths.
+- **Canonical Watchtower client wiring (MOD-004)** — `watchtower.ts`
+  constructs a `FederationAgentClient` (canonical `fw_agent_*` bearer)
+  additively alongside the legacy `WatchtowerClient`, used for
+  connect/heartbeat/events/disconnect when `BridgeConfig.watchtowerAgentToken`
+  is configured; absent, behavior is unchanged (legacy-only, zero
+  regression). Verified hermetically in `tests/watchtower.test.ts` (fetch
+  injected via the SDK's own `fetch` option, no real network).
 
 **NOT proven (do not claim these work):**
 
 - Live delivery to any Watchtower instance (`fapi.drdeeks.xyz` or local) — unit
-  tests are hermetic; no test emits a real event over the network.
+  tests are hermetic; no test emits a real event over the network. This
+  includes the canonical `FederationAgentClient` path (MOD-004) — no live
+  integration test against a real running Federation instance exists yet.
+- Owner creation / agent registration bootstrap
+  (`FederationOwnerClient.createOwner`/`registerAgent`) — not wired anywhere
+  in this codebase. `watchtowerOwnerToken` exists in config but nothing
+  reads it yet.
 - The Character Kit client against a **real running daemon** — tests use a
   protocol-accurate fake, not `agent_enforcer_daemon.js` itself.
 - Transports `unix-socket.ts` (dedicated module) / `mcp.ts` — not created;

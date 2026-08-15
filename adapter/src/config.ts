@@ -13,6 +13,8 @@ export interface RawConfigInput {
   watchtowerGateway?: string;
   watchtowerIngestionSecret?: string;
   watchtowerProducer?: string;
+  watchtowerAgentToken?: string;
+  watchtowerOwnerToken?: string;
   projectId?: string;
   agentId?: string;
   maxRetries?: number;
@@ -38,12 +40,19 @@ export function resolveConfig(input: RawConfigInput = {}): BridgeConfig {
   const maxRetries = input.maxRetries ?? Number(process.env.BRIDGE_MAX_RETRIES ?? "5");
   const retryBaseMs = input.retryBaseMs ?? Number(process.env.BRIDGE_RETRY_BASE_MS ?? "200");
 
+  // Canonical tokens (MOD-004): optional, never required. Absence means
+  // legacy-only behavior, unchanged from before this field existed.
+  const watchtowerAgentToken = input.watchtowerAgentToken ?? process.env.WATCHTOWER_AGENT_TOKEN;
+  const watchtowerOwnerToken = input.watchtowerOwnerToken ?? process.env.WATCHTOWER_OWNER_TOKEN;
+
   return {
     characterKitSocket: input.characterKitSocket ?? process.env.CHARACTER_KIT_SOCKET,
     characterKitToken: input.characterKitToken ?? process.env.CHARACTER_KIT_TOKEN,
     watchtowerGateway: gateway,
     watchtowerIngestionSecret: secret,
     watchtowerProducer: producer,
+    watchtowerAgentToken,
+    watchtowerOwnerToken,
     projectId,
     agentId,
     maxRetries: Number.isFinite(maxRetries) ? maxRetries : 5,

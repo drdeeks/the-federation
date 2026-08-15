@@ -104,9 +104,11 @@ export function createBridge(config: BridgeConfig): FullBridge {
 
   const bridge: Bridge = {
     async start() {
+      await wt.connect();
       running = true;
     },
     async stop() {
+      await wt.disconnect();
       running = false;
     },
     status(): BridgeStatus {

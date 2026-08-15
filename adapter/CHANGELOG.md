@@ -48,3 +48,33 @@
   authorize, validation gates, commands) are genuinely Federation-side
   gaps with no canonical bearer path yet. Corrected Phase 3's AGENTS.md §8
   status and ADAPTER_SPEC_SHEET.md's stale header table to reflect this.
+- 2026-08-14 — MOD-004 (canonical client wiring), closing the gap
+  `FEDERATION_ROUTE_MAP.md` documented: `watchtower.ts` now constructs a
+  `FederationAgentClient` (canonical `fw_agent_*` bearer) ADDITIONALLY to
+  the existing legacy `WatchtowerClient`, used when `BridgeConfig.
+  watchtowerAgentToken` is configured (new, optional, env
+  `WATCHTOWER_AGENT_TOKEN`/`WATCHTOWER_OWNER_TOKEN` via `config.ts`) —
+  absent, behavior is byte-for-byte unchanged from before this entry, zero
+  regression. `emit`/`heartbeat` route through whichever client is active;
+  `connect`/`disconnect` are new `WatchtowerClientHandle` methods (legacy
+  has no such concept, so they're canonical-only, no-op otherwise), wired
+  into `adapter.ts`'s `bridge.start()`/`stop()` which were previously
+  no-ops. The four routes with no canonical bearer path at all (lease
+  validate, tool authorize, validation gates, commands) remain
+  legacy-`WatchtowerClient`-only by necessity — that gap is Federation's
+  own MOD-002, not something this adapter can route around, though
+  Federation's `fix/rooms-agents-migrations` branch closed it there today
+  (unpushed, not yet this adapter's concern until it ships). New
+  `tests/watchtower.test.ts` (4 tests, fetch injected via the SDK's own
+  `fetch` option — no real network) verifies legacy-only routes all 4
+  handle methods to `/api/v1/events`, canonical mode routes them to the
+  4 distinct `/api/v1/agents/{id}/{connect,events,heartbeat,disconnect}`
+  endpoints with a real bearer header and no HMAC signature, and that
+  `emit()` doesn't pass its own bound projectId/agentId through as
+  conflicting extra fields. `config.test.ts` gained 3 tests for the new
+  optional fields. 27/27 unit tests pass, `tsc --noEmit` clean.
+  **Not done**: no live integration test against a real running Federation
+  instance (none was available this session) — `PHASE-5.1`-equivalent
+  verification against a real deployment remains outstanding, same caveat
+  this repo's own `AGENTS.md` §10 already flags for the Character Kit
+  daemon integration.
