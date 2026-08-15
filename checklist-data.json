@@ -1,0 +1,853 @@
+{
+  "blueprint": "blueprint.md",
+  "generated": "2026-08-14T19:00:44.464610Z",
+  "project_name": "The Federation Foundation",
+  "phases": [
+    {
+      "number": 0,
+      "title": "Foundation and Hackathon Contract",
+      "tag": "[PHASE-0-v1]",
+      "flag": "FEAT_FOUNDATION_AND_HACKATHON_CONTRACT",
+      "tasks": [
+        {
+          "id": "PHASE-0.1",
+          "description": "docs/BUILD_SCOPE.md",
+          "deliverable": "docs/BUILD_SCOPE.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-0.2",
+          "description": "docs/SUBMISSION-GUARDRAILS.md",
+          "deliverable": "docs/SUBMISSION-GUARDRAILS.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-0.3",
+          "description": "docs/PROVENANCE.md",
+          "deliverable": "docs/PROVENANCE.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-0.4",
+          "description": "docs/hackathon/architecture.md",
+          "deliverable": "docs/hackathon/architecture.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-0.5",
+          "description": "review-phase0.md",
+          "deliverable": "review-phase0.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "review",
+          "validator_path": ""
+        }
+      ]
+    },
+    {
+      "number": 1,
+      "title": "Cognitive Memory Substrate",
+      "tag": "[PHASE-1-v1]",
+      "flag": "FEAT_COGNITIVE_MEMORY_SUBSTRATE",
+      "tasks": [
+        {
+          "id": "PHASE-1.1",
+          "description": "shared/memory/README.md",
+          "deliverable": "shared/memory/README.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-1.2",
+          "description": "src/memory/README.md",
+          "deliverable": "src/memory/README.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-1.3",
+          "description": "docs/MEMORY-ARCHITECTURE.md",
+          "deliverable": "docs/MEMORY-ARCHITECTURE.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-1.4",
+          "description": "tests/memory-isolation.test.mjs",
+          "deliverable": "tests/memory-isolation.test.mjs",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-1.5",
+          "description": "review-phase1.md",
+          "deliverable": "review-phase1.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "review",
+          "validator_path": ""
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Agent Management UI and Local Control",
+      "tag": "[PHASE-2-v1]",
+      "flag": "FEAT_AGENT_MANAGEMENT_UI_AND_LOCAL_CONTROL",
+      "tasks": [
+        {
+          "id": "PHASE-2.1",
+          "description": "src/ui/agent-drawer.md",
+          "deliverable": "src/ui/agent-drawer.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-2.2",
+          "description": "src/control/control-contract.md",
+          "deliverable": "src/control/control-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-2.3",
+          "description": "docs/ui/agent-management.md",
+          "deliverable": "docs/ui/agent-management.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-2.4",
+          "description": "tests/control-contract.test.mjs",
+          "deliverable": "tests/control-contract.test.mjs",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-2.5",
+          "description": "review-phase2.md",
+          "deliverable": "review-phase2.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "review",
+          "validator_path": ""
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Google ADK Runtime and Native Observability",
+      "tag": "[PHASE-3-v1]",
+      "flag": "FEAT_GOOGLE_ADK_RUNTIME_AND_NATIVE_OBSERVABILITY",
+      "tasks": [
+        {
+          "id": "PHASE-3.1",
+          "description": "src/runtime/google/adk-contract.md",
+          "deliverable": "src/runtime/google/adk-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-3.2",
+          "description": "src/observability/event-contract.md",
+          "deliverable": "src/observability/event-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-3.3",
+          "description": "docs/hackathon/demo-script.md",
+          "deliverable": "docs/hackathon/demo-script.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-3.4",
+          "description": "tests/observability-contract.test.mjs",
+          "deliverable": "tests/observability-contract.test.mjs",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-3.5",
+          "description": "review-phase3.md",
+          "deliverable": "review-phase3.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "review",
+          "validator_path": ""
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "title": "Adapter Bridge API MCP and Webhooks",
+      "tag": "[PHASE-4-v1]",
+      "flag": "FEAT_ADAPTER_BRIDGE_API_MCP_AND_WEBHOOKS",
+      "tasks": [
+        {
+          "id": "PHASE-4.1",
+          "description": "src/integrations/adapter/api-contract.md",
+          "deliverable": "src/integrations/adapter/api-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-4.2",
+          "description": "src/integrations/adapter/mcp-contract.md",
+          "deliverable": "src/integrations/adapter/mcp-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-4.3",
+          "description": "src/integrations/webhooks/scope-contract.md",
+          "deliverable": "src/integrations/webhooks/scope-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-4.4",
+          "description": "tests/adapter-scope.test.mjs",
+          "deliverable": "tests/adapter-scope.test.mjs",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-4.5",
+          "description": "review-phase4.md",
+          "deliverable": "review-phase4.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "review",
+          "validator_path": ""
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "title": "Integration Readiness Demo and Federation Handoff",
+      "tag": "[PHASE-5-v1]",
+      "flag": "FEAT_INTEGRATION_READINESS_DEMO_AND_FEDERATION_HANDOFF",
+      "tasks": [
+        {
+          "id": "PHASE-5.1",
+          "description": "docs/hackathon/reproducible-setup.md",
+          "deliverable": "docs/hackathon/reproducible-setup.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-5.2",
+          "description": "docs/hackathon/disclosure-matrix.md",
+          "deliverable": "docs/hackathon/disclosure-matrix.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-5.3",
+          "description": "docs/federation-handoff.md",
+          "deliverable": "docs/federation-handoff.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-5.4",
+          "description": "docs/hackathon/demo-evidence.md",
+          "deliverable": "docs/hackathon/demo-evidence.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "file",
+          "validator_path": ""
+        },
+        {
+          "id": "PHASE-5.5",
+          "description": "review-phase5.md",
+          "deliverable": "review-phase5.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": "",
+          "deliverable_type": "review",
+          "validator_path": ""
+        }
+      ]
+    }
+  ],
+  "modules": [
+    {
+      "id": "MOD-001",
+      "name": "Federation Foundation",
+      "purpose": "identity, boundaries, provenance",
+      "feature_flag": "FEAT_FOUNDATION"
+    },
+    {
+      "id": "MOD-002",
+      "name": "Cognitive Memory",
+      "purpose": "four tiers and explicit promotion",
+      "feature_flag": "FEAT_MEMORY_SUBSTRATE"
+    },
+    {
+      "id": "MOD-003",
+      "name": "Knowledge Retrieval",
+      "purpose": "graph, corpus, vectors, hybrid search",
+      "feature_flag": "FEAT_KNOWLEDGE_RETRIEVAL"
+    },
+    {
+      "id": "MOD-004",
+      "name": "Context Router",
+      "purpose": "read-only queries and composition",
+      "feature_flag": "FEAT_CONTEXT_ROUTER"
+    },
+    {
+      "id": "MOD-005",
+      "name": "Control Plane",
+      "purpose": "policy, ACK, habits, commitments, controls",
+      "feature_flag": "FEAT_AGENT_CONTROL"
+    },
+    {
+      "id": "MOD-006",
+      "name": "Agent UI",
+      "purpose": "fleet, drawer, terminal, memory, tasks",
+      "feature_flag": "FEAT_AGENT_UI"
+    },
+    {
+      "id": "MOD-007",
+      "name": "Google Runtime",
+      "purpose": "Gemini, ADK, cloud, delegation",
+      "feature_flag": "FEAT_GOOGLE_RUNTIME"
+    },
+    {
+      "id": "MOD-008",
+      "name": "Observability",
+      "purpose": "immutable actions, health, loops, audit",
+      "feature_flag": "FEAT_NATIVE_OBSERVABILITY"
+    },
+    {
+      "id": "MOD-009",
+      "name": "Adapter Bridge",
+      "purpose": "API, MCP, normalization",
+      "feature_flag": "FEAT_ADAPTER_BRIDGE"
+    },
+    {
+      "id": "MOD-010",
+      "name": "Scoped Integration",
+      "purpose": "credentials, imports, webhooks",
+      "feature_flag": "FEAT_SCOPED_INTEGRATION"
+    },
+    {
+      "id": "MOD-011",
+      "name": "Evidence Handoff",
+      "purpose": "demo, disclosure, reproducibility",
+      "feature_flag": "FEAT_EVIDENCE_HANDOFF"
+    }
+  ],
+  "screens": [],
+  "feature_flags": {
+    "FEAT_FOUNDATION_AND_HACKATHON_CONTRACT": {
+      "phases": [
+        "PHASE-0"
+      ],
+      "modules": [],
+      "screens": []
+    },
+    "FEAT_COGNITIVE_MEMORY_SUBSTRATE": {
+      "phases": [
+        "PHASE-1"
+      ],
+      "modules": [],
+      "screens": []
+    },
+    "FEAT_AGENT_MANAGEMENT_UI_AND_LOCAL_CONTROL": {
+      "phases": [
+        "PHASE-2"
+      ],
+      "modules": [],
+      "screens": []
+    },
+    "FEAT_GOOGLE_ADK_RUNTIME_AND_NATIVE_OBSERVABILITY": {
+      "phases": [
+        "PHASE-3"
+      ],
+      "modules": [],
+      "screens": []
+    },
+    "FEAT_ADAPTER_BRIDGE_API_MCP_AND_WEBHOOKS": {
+      "phases": [
+        "PHASE-4"
+      ],
+      "modules": [],
+      "screens": []
+    },
+    "FEAT_INTEGRATION_READINESS_DEMO_AND_FEDERATION_HANDOFF": {
+      "phases": [
+        "PHASE-5"
+      ],
+      "modules": [],
+      "screens": []
+    },
+    "FEAT_FOUNDATION": {
+      "phases": [],
+      "modules": [
+        "Federation Foundation"
+      ],
+      "screens": []
+    },
+    "FEAT_MEMORY_SUBSTRATE": {
+      "phases": [],
+      "modules": [
+        "Cognitive Memory"
+      ],
+      "screens": []
+    },
+    "FEAT_KNOWLEDGE_RETRIEVAL": {
+      "phases": [],
+      "modules": [
+        "Knowledge Retrieval"
+      ],
+      "screens": []
+    },
+    "FEAT_CONTEXT_ROUTER": {
+      "phases": [],
+      "modules": [
+        "Context Router"
+      ],
+      "screens": []
+    },
+    "FEAT_AGENT_CONTROL": {
+      "phases": [],
+      "modules": [
+        "Control Plane"
+      ],
+      "screens": []
+    },
+    "FEAT_AGENT_UI": {
+      "phases": [],
+      "modules": [
+        "Agent UI"
+      ],
+      "screens": []
+    },
+    "FEAT_GOOGLE_RUNTIME": {
+      "phases": [],
+      "modules": [
+        "Google Runtime"
+      ],
+      "screens": []
+    },
+    "FEAT_NATIVE_OBSERVABILITY": {
+      "phases": [],
+      "modules": [
+        "Observability"
+      ],
+      "screens": []
+    },
+    "FEAT_ADAPTER_BRIDGE": {
+      "phases": [],
+      "modules": [
+        "Adapter Bridge"
+      ],
+      "screens": []
+    },
+    "FEAT_SCOPED_INTEGRATION": {
+      "phases": [],
+      "modules": [
+        "Scoped Integration"
+      ],
+      "screens": []
+    },
+    "FEAT_EVIDENCE_HANDOFF": {
+      "phases": [],
+      "modules": [
+        "Evidence Handoff"
+      ],
+      "screens": []
+    }
+  },
+  "phases_data": [
+    {
+      "deliverables": [
+        {
+          "id": "PHASE-0.1",
+          "deliverable": "docs/BUILD_SCOPE.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-0.2",
+          "deliverable": "docs/SUBMISSION-GUARDRAILS.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-0.3",
+          "deliverable": "docs/PROVENANCE.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-0.4",
+          "deliverable": "docs/hackathon/architecture.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-0.5",
+          "deliverable": "review-phase0.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        }
+      ],
+      "flag": "FEAT_FOUNDATION_AND_HACKATHON_CONTRACT"
+    },
+    {
+      "deliverables": [
+        {
+          "id": "PHASE-1.1",
+          "deliverable": "shared/memory/README.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-1.2",
+          "deliverable": "src/memory/README.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-1.3",
+          "deliverable": "docs/MEMORY-ARCHITECTURE.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-1.4",
+          "deliverable": "tests/memory-isolation.test.mjs",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-1.5",
+          "deliverable": "review-phase1.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        }
+      ],
+      "flag": "FEAT_COGNITIVE_MEMORY_SUBSTRATE"
+    },
+    {
+      "deliverables": [
+        {
+          "id": "PHASE-2.1",
+          "deliverable": "src/ui/agent-drawer.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-2.2",
+          "deliverable": "src/control/control-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-2.3",
+          "deliverable": "docs/ui/agent-management.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-2.4",
+          "deliverable": "tests/control-contract.test.mjs",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-2.5",
+          "deliverable": "review-phase2.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        }
+      ],
+      "flag": "FEAT_AGENT_MANAGEMENT_UI_AND_LOCAL_CONTROL"
+    },
+    {
+      "deliverables": [
+        {
+          "id": "PHASE-3.1",
+          "deliverable": "src/runtime/google/adk-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-3.2",
+          "deliverable": "src/observability/event-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-3.3",
+          "deliverable": "docs/hackathon/demo-script.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-3.4",
+          "deliverable": "tests/observability-contract.test.mjs",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-3.5",
+          "deliverable": "review-phase3.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        }
+      ],
+      "flag": "FEAT_GOOGLE_ADK_RUNTIME_AND_NATIVE_OBSERVABILITY"
+    },
+    {
+      "deliverables": [
+        {
+          "id": "PHASE-4.1",
+          "deliverable": "src/integrations/adapter/api-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-4.2",
+          "deliverable": "src/integrations/adapter/mcp-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-4.3",
+          "deliverable": "src/integrations/webhooks/scope-contract.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-4.4",
+          "deliverable": "tests/adapter-scope.test.mjs",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-4.5",
+          "deliverable": "review-phase4.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        }
+      ],
+      "flag": "FEAT_ADAPTER_BRIDGE_API_MCP_AND_WEBHOOKS"
+    },
+    {
+      "deliverables": [
+        {
+          "id": "PHASE-5.1",
+          "deliverable": "docs/hackathon/reproducible-setup.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-5.2",
+          "deliverable": "docs/hackathon/disclosure-matrix.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-5.3",
+          "deliverable": "docs/federation-handoff.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-5.4",
+          "deliverable": "docs/hackathon/demo-evidence.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        },
+        {
+          "id": "PHASE-5.5",
+          "deliverable": "review-phase5.md",
+          "validation": "",
+          "rollback": "",
+          "prerequisite": "",
+          "feature_flag": ""
+        }
+      ],
+      "flag": "FEAT_INTEGRATION_READINESS_DEMO_AND_FEDERATION_HANDOFF"
+    }
+  ],
+  "enforcement": {
+    "mode": "loop",
+    "validators": true,
+    "auto_verify": false,
+    "phase_gates": true
+  }
+}

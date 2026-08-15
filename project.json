@@ -1,0 +1,19 @@
+{
+  "project": "The Federation Foundation",
+  "slug": "the-federation-foundation",
+  "scope": "project",
+  "phases": [
+    "Foundation and Hackathon Contract",
+    "Cognitive Memory Substrate",
+    "Agent Management UI and Local Control",
+    "Google ADK Runtime and Native Observability",
+    "Adapter Bridge API MCP and Webhooks",
+    "Integration Readiness Demo and Federation Handoff"
+  ],
+  "version": "1.0",
+  "created_at": "2026-08-14T18:30:55.552636+00:00",
+  "blueprint": "/home/drdeek/projects/hackathon/blueprint.md",
+  "checklist": "/home/drdeek/projects/hackathon/checklist.md",
+  "changelog": "/home/drdeek/projects/hackathon/CHANGELOG.md",
+  "assignments": "/home/drdeek/projects/hackathon/assignments.json"
+}

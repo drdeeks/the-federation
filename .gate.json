@@ -1,0 +1,11 @@
+{
+  "pre_checks": [],
+  "loop_command": [
+    "bash",
+    ".blueprint-chain/run-current-phase-gate.sh"
+  ],
+  "post_checks": [],
+  "hmac_secret_path": "~/.config/gate/hmac.key",
+  "log_path": ".blueprint-chain/.loop-log.jsonl",
+  "git_integration": true
+}
