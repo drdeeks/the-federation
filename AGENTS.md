@@ -154,6 +154,20 @@ Remaining for PHASE-2 gate: `src/ui/agent-drawer.md` (doc),
 controls to control API, connecting memory/tasks/observability to local
 stores, implementing job management.
 
+**2026-08-16 — Memory System (MOD-002) + Task/Job Management (MOD-005) implemented.**
+Four-tier memory substrate built on `shared/memory` engine:
+- `src/memory/working/working-store.js` — Daily tier (TTL 36h, max 2k, auto-promotion eligible)
+- `src/memory/episodic/episodic-store.js` — Weekly tier (TTL 7d, max 5k, episode grouping)
+- `src/memory/persistent/persistent-store.js` — Long-term tier (no TTL, max 20k, explicit promotion)
+- `src/memory/schemas/identity-context-store.js` — Identity tier (no TTL, immutable, max 1k)
+- `src/memory/memory-manager.js` — Unified coordinator with auto-promotion pipeline (working→episodic→persistent→identity)
+All stores are thin re-export shims over `shared/memory/store/memory-store.js`, no duplication.
+Task/Job management in `src/context/`:
+- `src/context/task-manager.js` — Full CRUD, status transitions, priority queue, assignment, stats
+- `src/context/job-manager.js` — Scheduled/recurring/oneshot jobs, cron-like scheduling, retry policy, manual execution
+- `src/context/router.js` — REST API for tasks/jobs per agent
+API verified: npm run smoke (3/3), ui typecheck+build (clean), adapter validate+test (32/32).
+
 - **Real bug found and fixed**: `src/memory/retrieval/embedding-engine.js`
   was a 376-line file, 374 lines identical to
   `shared/memory/engines/embedding-engine.js` (only two comment-header
