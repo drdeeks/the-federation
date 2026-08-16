@@ -78,6 +78,37 @@ Rollback Ref: commit 3e5dcb5 (federation-society-hardening... this repo,
               blueprint.md itself untouched, no rollback needed there
 ```
 
+## CL-0006 — MOD-003 Knowledge Retrieval + MOD-004 Context Router
+
+```
+Date        : 2026-08-16
+Contributor : Claude
+Modules     : [MOD-003, MOD-004]
+Section Tags: [[PHASE-1-v1], [PHASE-2-v1]]
+Files Changed: [src/knowledge/graph/knowledge-graph.js (new),
+              src/knowledge/corpus/document-store.js (new),
+              src/knowledge/vectors/vector-store.js (new),
+              src/knowledge/retrieval/knowledge-retrieval.js (new),
+              src/knowledge/index.js (new),
+              src/context/router.js (new — ContextRouter)]
+Description : Implemented Knowledge Retrieval plane (MOD-003), independent
+              from episodic memory (MOD-002): Knowledge Graph (entities,
+              relations, path finding), Document Corpus (metadata, content
+              hash dedup), Vector Store (chunks, embeddings, cosine search),
+              Hybrid Retrieval (graph + corpus + vectors, task-context
+              composition). Context Router (MOD-004) as read-only
+              composition layer above both planes: composes episodic +
+              knowledge with provenance/confidence. No cross-dependency
+              between MOD-002 and MOD-003; ContextRouter sits above both.
+Tests Passing: KnowledgeRetrieval basic ops, ContextRouter instantiation;
+               npm run smoke (3 pass), ui typecheck+build (clean),
+               adapter validate+test (32/32)
+Phase       : PHASE-1 / PHASE-2
+Rollback Ref: git revert HEAD
+```
+
+---
+
 ## CL-0004 — AgentDrawer component: per-agent management drawer with 5 tabs
 
 ```
