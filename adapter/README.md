@@ -4,7 +4,10 @@
 [![Node](https://img.shields.io/badge/node-%3E%3D20-339933?logo=node.js&logoColor=white)](package.json)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](tsconfig.json)
 [![Unit tests](https://img.shields.io/badge/unit%20tests-32%2F32%20passing-brightgreen)](tests/)
+[![npm version](https://img.shields.io/npm/v/@the-federation/adapter?logo=npm&color=cb3837)](https://www.npmjs.com/package/@the-federation/adapter)
+[![npm downloads](https://img.shields.io/npm/dm/@the-federation/adapter?logo=npm&color=cb3837)](https://www.npmjs.com/package/@the-federation/adapter)
 [![Status](https://img.shields.io/badge/status-not%20production--ready-orange)](docs/ADAPTER_SPEC_SHEET.md)
+[![Publish](https://img.shields.io/github/actions/workflow/status/drdeek/federation-adapters/publish.yml?branch=main&label=publish&logo=github)](https://github.com/drdeek/federation-adapters/actions/workflows/publish.yml)
 
 > A translator between independent primitives. It owns no policy.
 

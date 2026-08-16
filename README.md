@@ -1,102 +1,108 @@
-# canonical/ — Submission Workspace (self-contained)
+# The Federation
 
-The single source of truth for the hackathon submission. Stands alone: nothing
-hardcoded, path-agnostic, no links to outside repos.
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D20-339933?logo=node.js&logoColor=white)](package.json)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?logo=typescript&logoColor=white)](tsconfig.json)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](ui/package.json)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](ui/package.json)
+[![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)](package.json)
+[![Smoke tests](https://img.shields.io/badge/smoke%20tests-3%2F3%20passing-brightgreen)](tests/)
+[![Adapter tests](https://img.shields.io/badge/adapter%20tests-32%2F32%20passing-brightgreen)](adapter/tests/)
+[![Status](https://img.shields.io/badge/status-foundation%20layer-orange)](docs/BUILD_SCOPE.md)
 
-## Rules of this workspace
+The parent platform and persistent digital civilization for humans and
+autonomous agents.
 
-1. **No hardcoded paths.** Everything self-resolving (relative, env-driven).
-2. **No links out.** This repo references no other repo by path. External systems
-   (Character Kit, Watchtower, ADK) are integrated at submission time and
-   DISCLOSED as pre-existing per hackathon rules (line 856).
-3. **`layers/` is the Fleet map.** 7 subdirs named by FUNCTION (memory, security,
-   registry, runtime, gateway, observability, modelarmor) — see `layers/README.md`.
-4. **Deadweight stays out.** Unincorporated material goes to `deadweight/`
-   (gitignored), never committed.
-5. **Project name is chosen by the human, not generated.** (AI-chosen names
-   collide; human-chosen names don't.)
+This repository is the Federation foundation layer: the operator console that
+mirrors Federation Watchtower (agent registry, lifecycle, observability, webhooks,
+operator credentials, MCP leases) and controls CharacterKit per agent
+(habits, ACK, commitments, command policy, fail-closed enforcement). It provides
+local agent management with live terminal, memory, tasks, logs, jobs, steering,
+and kill controls — with local observability fallback when Watchtower is unreachable.
 
-## Layout
+## Product hierarchy
 
-```
-canonical/
-├── docs/        hackathon-rules.html (authoritative), design notes
-├── scripts/     build / deploy / verify helpers (empty until needed)
-├── logs/        runtime logs (gitignored)
-├── tests/       submission-level tests
-├── .trash/      quarantined material (gitignored)
-├── shared/      reusable, verified modules (memory/, enforcement/)
-├── layers/      the 7 Fleet subsystems, by function
-└── deadweight/  unincorporated salvage (gitignored)
-```
-
-## What's ported so far (verified)
-
-- `shared/memory/` — salvaged 4-layer memory core (store/embedding/recall/forget/
-  learning/ingestion), scrubbed of the old hardcoded vault path. Smoke-tested.
-- `shared/enforcement/fail-closed-gate.js` — reusable gate that calls Character
-  Kit and blocks on any error.
-
-## Provenance / disclosure
-
-The `shared/memory` and `shared/enforcement` modules are derived from prior
-(non-submitted) work and are DISCLOSED as pre-existing per rules line 856.
-Character Kit, Watchtower, and the 5 agent engines are external pre-existing
-systems, likewise disclosed at submission.
-
-## Verify
-
-```
-node --test shared/memory/smoke.test.mjs
+```text
+The Federation
+├── Federation-CreAgent       creation and onboarding
+├── Federation-Marketplace    capabilities and exchange
+├── Federation-Arcade         games and shared experiences
+├── Federation-Brain-Sync     collaborative intelligence
+└── future Federation-*       new districts and institutions
 ```
 
-<!-- APPENDED-UPDATES: 2026-08-12 — do not rewrite above; additions only -->
+The Federation is the whole. Each future project contributes another part of
+the same civilization and inherits Federation primitives and identity.
 
-## Appended updates (2026-08-12)
+## Ownership boundaries
 
-The following were added after the initial scaffold. Above remains the original
-orientation; this section records what changed so the doc stays true without
-being rewritten.
+| Capability | Canonical Owner | This Repository's Role |
+|---|---|---|
+| Agent identity, registration, lifecycle, credentials (`fw_owner_*`, `fw_agent_*`, `fw_operator_*`) | **Federation Watchtower** | Mirror via `FederationOwnerClient`/`FederationAgentClient`; surface operator-facing identity/configuration |
+| Heartbeat/watchdog, agent pause/resume/revoke, room/scene projection | **Federation Watchtower** | Mirror via SDK/MCP reads; surface fleet/agent state |
+| Webhook delivery (alerts only, signed HMAC), operator credentials (`fw_operator_*`), per-org webhook config | **Federation Watchtower** | Configure via admin/operator routes; verify inbound `X-Watchtower-Signature` |
+| Leases, validation gates, controlled-tool authorization, incident ledger | **Federation Watchtower (ProjectGuardrail)** | Opt-in integration via MCP org credential (`watchtower:lease` + `project:<id>:control`); leases are optional |
+| Behavioral enforcement (habits, ACK, commitments, command policy, fail-closed gating) | **CharacterKit** | Configure per agent via adapter's `CharacterKitClient`; adapter transmits denials → Watchtower |
+| Cognitive memory (four tiers), local agent management UI, task management, live terminal, steer/kill, logs, jobs | **This Repository** | Owns and operates; local steer/kill operate the local agent process only |
+| Native immutable-action observability (local projection + Watchtower mirror) | **This Repository** | Mirrors Watchtower events; local fallback observability remains functional when Watchtower is unreachable |
 
-### Added since scaffold
-- `docs/FOREVER_DOCTRINE.yaml` — the constitution of this repo (POL-001 singular
-  source of truth). Outranks all other docs here.
-- `docs/DOCTRINE-BINDING.md` — declares the YAML as constitution; maps the 7
-  policies onto this repo's layout; records the scope rule (only this dir
-  touched; external = vendored copy; names human-chosen).
-- `docs/FOREVER_DOCTRINE.sha256` — tamper-EVIDENT checksum of the constitution
-  (POL-004 "say evident, mean evident"). Recompute after any edit to the YAML.
-- `docs/session-export.md` — full session transcript (session `20260810_111345
-  _002e80`) from isolation → doctrine binding → memory extraction → adapter
-  vendoring. Faithful log; contains absolute paths from earlier turns by nature.
-- `adapter/` — vendored copy of `character-kit-watchtower-bridge` (the translator
-  between Character Kit and Watchtower). No `.git`, no `node_modules`. Brought in
-  as an isolated copy per the scope rule; it is pre-existing, DISCLOSED.
-- `shared/character-kit-watchtower-bridge.tar.gz` — archive of the adapter (37
-  entries, integrity verified).
+## Current foundation
 
-### Layout corrected (actual tree)
-```
-canonical/
-├── docs/        FOREVER_DOCTRINE.yaml (constitution), DOCTRINE-BINDING.md,
-│               FOREVER_DOCTRINE.sha256, hackathon-rules.html, session-export.md
-├── adapter/     vendored character-kit-watchtower-bridge (no .git/node_modules)
-├── scripts/     build / deploy / verify helpers (empty until needed)
-├── logs/        runtime logs (gitignored)
-├── tests/       submission-level tests
-├── .trash/      quarantined material (gitignored)
-├── shared/      memory/ enforcement/ character-kit-watchtower-bridge.tar.gz
-├── layers/      the 7 Fleet subsystems, by function
-└── deadweight/  unincorporated salvage (gitignored)
+```text
+Identity (Watchtower mirror) -> memory -> policy (CharacterKit) -> agent management -> local control
+                                      |
+                                      v
+                              interoperable execution
 ```
 
-### Secrets location (doctrine line 871)
-Key vaults go in `.secrets/` (gitignored), NOT committed `.env`. Both are
-excluded in `.gitignore`.
+The local Federation interface is the operator's home: agent cards, live
+terminal/activity feeds, task state, memory management, policy and ACK
+configuration, steering, pause/resume, kill, logs, job management, and fleet
+visibility — with local observability fallback when Watchtower is unreachable.
 
-### Verification still holds
+External systems are integration points. They do not define The Federation.
+
+## Memory systems
+
+The repository intentionally contains two memory systems:
+
+- `shared/memory/` — the reusable, storage-agnostic memory engine for storage,
+  ingestion, embeddings, recall, forgetting, and learning.
+- `src/memory/` — the Federation application memory subsystem for four independent cognitive tiers:
+  working, episodic, semantic, and identity/persistent context; plus scope,
+  indexing, retrieval policy, migrations, and context assembly.
+
+The Federation subsystem consumes the shared engine. It is not an independent
+duplicate implementation. See `docs/MEMORY-ARCHITECTURE.md`.
+
+## Repository map
+
+```text
+AGENTS.md                         repository operating rules
+docs/FEDERATION-CONCEPT.md       product and civilization source of truth
+docs/BUILD_SCOPE.md              current implementation scope
+docs/INTEGRATION_MAP.md          dependency and route inventory
+docs/MEMORY-ARCHITECTURE.md      two-system memory boundary
+docs/PROVENANCE.md               disclosure and attribution rules
+shared/memory/                    reusable memory engine
+shared/enforcement/              fail-closed enforcement adapter
+adapter/                          interoperability bridge (CharacterKit ⇄ Watchtower)
+layers/                           foundation subsystem boundaries
+src/server/                       Express + ws server (console API + live terminal)
+src/observability/                Watchtower mirror + local fallback observability
+src/control/                      CharacterKit control orchestration
+src/memory/                       Federation application memory subsystem (four tiers)
+src/context/                      task management
+src/integrations/adapter-client.js  thin wrapper over adapter/dist public API
 ```
-node --test shared/memory/smoke.test.mjs   # 3/3 green
+
+## Verification
+
+```bash
+npm run smoke
+cd adapter && npm run validate
+cd adapter && npm test
 ```
-Zero hardcoded paths/network-IDs in our code + doctrine (the only `/home`
-reference anywhere is inside the session log, expected).
+
+Passing the local smoke test does not prove a live external integration or
+cloud deployment.
