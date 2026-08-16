@@ -1,7 +1,7 @@
 {
   "name": "@the-federation/adapter",
   "version": "0.1.0",
-  "description": "Translator bridge between Character Kit (local enforcement) and Federation Watchtower (federation/observability). The bridge owns no policy; it normalizes enforcement activity into Watchtower events and Watchtower results into adapter-visible state.",
+  "description": "Generic translator adapter between independent upstream/downstream primitives. Currently bridges Character Kit (local behavioral enforcement) and Federation Watchtower (federation/control/observability). Owns no policy; normalizes upstream activity into downstream events and downstream results into adapter-visible state. Architecture supports additional bridge pairs via isolated protocol clients → normalized contracts → dedupe/ordering → durable delivery.",
   "type": "module",
   "license": "MIT",
   "author": "drdeeks",
