@@ -112,6 +112,63 @@ Rollback Ref: git revert HEAD
 
 ---
 
+## CL-0004b — Adapter ordering defect fix (HARDENING-SCOPE.md P0) + rename to @the-federation/adapter
+
+```
+Date        : 2026-08-16
+Contributor : Claude
+Modules     : [MOD-009, MOD-010]
+Section Tags: [[PHASE-4-v1]]
+Files Changed: [adapter/src/normalization/ordering.ts (fixed),
+              adapter/tests/ordering.test.ts (new),
+              adapter/package.json (renamed, description updated),
+              adapter/CHANGELOG.md, adapter/AGENTS.md (synced)]
+Description : Fixed ordering defect in adapter/src/normalization/ordering.ts:
+              future sequences (sequence > last + 1) and stale sequences
+              (sequence <= last) no longer advance ordering state — only
+              sequence === last + 1 advances. Added regression test
+              (adapter/tests/ordering.test.ts) covering exact defect
+              scenario: 1 → 5 (out_of_order, state stays 1) → 2 → 3 → 4 → 5
+              all accepted, final state 4. Renamed package to
+              @the-federation/adapter (generic, scalable, non-domain-specific)
+              with updated description. Copied to canonical home:
+              ~/projects/federation-adapters/watchtower-ack-adapter/.
+Tests Passing: npm run smoke (3 pass), cd adapter && npm run validate
+               (tsc clean), cd adapter && npm test (32/32 pass)
+Phase       : PHASE-4
+Rollback Ref: git revert HEAD
+```
+
+---
+
+## CL-0004c — Tooling badges + GitHub publish workflow + LICENSE files
+
+```
+Date        : 2026-08-16
+Contributor : Claude
+Modules     : [MOD-001, MOD-009, MOD-010]
+Section Tags: [[PHASE-0-v1], [PHASE-4-v1]]
+Files Changed: [README.md (React/Vite/Express badges),
+              adapter/README.md (npm version/downloads/publish badges),
+              adapter/.github/workflows/publish.yml (new — auto-publish on push to main),
+              LICENSE (new, root), adapter/LICENSE (new, adapter),
+              CHANGELOG.md, AGENTS.md]
+Description : Added accurate tooling badges to root README.md
+              (React 19, Vite 8, Express 4). Added npm version, downloads,
+              and publish workflow badges to adapter README.md. Created
+              GitHub Actions workflow at adapter/.github/workflows/publish.yml
+              that runs validate (typecheck + test + build) then publishes
+              @the-federation/adapter to npm with provenance on push to main.
+              Added MIT LICENSE files to root and adapter. Synced canonical
+              adapter at ~/projects/federation-adapters/watchtower-ack-adapter/.
+Tests Passing: npm run smoke (3 pass), ui typecheck+build (clean),
+               adapter validate+test (32/32), canonical adapter validate+test (32/32)
+Phase       : PHASE-0 / PHASE-4
+Rollback Ref: git revert HEAD
+```
+
+---
+
 ## CL-0003 — Phase I doc corrections: ownership boundaries, no project-labeled dirs, Federation branch integration target
 
 ```
