@@ -41,7 +41,7 @@ Critique: PASS. Independently re-verified every claim in src/memory/README.md an
      (`src/memory/episodic/` is empty, `src/memory/persistent/` is empty, no
      knowledge-graph store, no `src/context/` for the Memory Router/Context
      Composer) rather than a vague "not implemented yet." I cross-checked these
-     against `docs/MEMORY-ARCHITECTURE.md` §11 ("Current repository mapping"),
+     against `docs/MEMORY-SYSTEM.md` §11 ("Current repository mapping"),
      which independently lists the same set of not-yet-integrated modules
      (episodic daily/weekly APIs, long-term/declarative API, knowledge graph,
      Memory Router, Context Composer). The two documents agree with each other

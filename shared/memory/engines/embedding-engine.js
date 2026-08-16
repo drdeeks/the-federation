@@ -1,5 +1,5 @@
 /**
- * Embedding Engine for MNEMOSYNE
+ * Embedding Engine for the shared Federation memory engine
  * Generates vector embeddings for text content
  * Supports a local backend and a pluggable remote API backend, with caching
  */
@@ -147,7 +147,7 @@ export class VectorIndex {
 }
 
 /**
- * Embedding Engine for MNEMOSYNE
+ * Embedding Engine for the shared Federation memory engine
  * Generates vector embeddings for text content
  * Supports a local (character n-gram) backend and a pluggable remote API backend
  */

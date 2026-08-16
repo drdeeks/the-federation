@@ -3,7 +3,7 @@
 This document records what the adapter translates and what belongs outside
 the adapter. It is not a catalog of every Watchtower route.
 
-## Current Watchtower SDK reference
+## Current Watchtower SDK reference: `@federation-watchtower/sdk`
 
 The inspected sibling branch is `fix/rooms-agents-migrations`, observed at
 HEAD `4c13601`. Its current SDK includes:

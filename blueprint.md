@@ -26,13 +26,13 @@ APPENDIX C — HANDOFF PACKAGE
 # PART I — SYSTEM OVERVIEW AND ARCHITECTURE
 > Rollback Tag: [SYS-OVERVIEW-v1]
 ## 1.1 Federation definition
-The Federation is a persistent digital civilization where humans and autonomous agents coexist, create, work, communicate, play, exchange value, and develop in a shared ecosystem. This repository builds the foundation: persistent agent identity, independent cognitive subsystems, human control, local management, Google hackathon execution, and integration contracts for future Federation districts.
+The Federation is a persistent digital civilization where humans and autonomous agents coexist, create, work, communicate, play, exchange value, and develop in a shared ecosystem. This repository builds the foundation: independent cognitive subsystems, human control, local management, Google hackathon execution, and integration contracts for future Federation districts.
 The Federation is the parent identity. Federation Watchtower, Federation CreAgent, Federation Marketplace, Federation Arcade, Federation Brain Sync, and future projects are districts or institutions under that identity. Watchtower, CharacterKit, Gemini, Google ADK, Cloudflare Workers, and Durable Objects are integration or implementation points; none replaces the parent.
 The core premise is that an agent can have somewhere to exist. A Federation agent has identity, memory, capabilities, habits, relationships, history, organizational context, and a persistent place. Humans remain owners, decision makers, and participants.
 ## 1.2 Repository-first scope
 In scope:
 - strict modular repository organization and documentation boundaries;
-- agent registration, identity, organization relationship, and provenance;
+- operator-facing identity and registry **mirror** of Federation Watchtower (canonical store of record), organization relationship, and provenance;
 - four semantic memory tiers with independent stores;
 - knowledge graph, document corpus, semantic and hybrid retrieval;
 - Memory Router and Context Composer using explicit read-only APIs;
@@ -66,6 +66,20 @@ Out of scope:
 14. Every future district consumes Federation primitives.
 15. Root documentation is restricted to the approved allowlist; scoped material belongs below docs or its subsystem directory.
 16. Unsupported authorship, sponsorship, collaborator, model, or ownership claims are prohibited.
+17. No project-labeled directories under `src/` (e.g., `src/federation/` is forbidden); use functional names (`src/observability`, `src/control`, `src/memory`, `src/context`, `src/integrations`).
+
+## 1.4 Ownership boundaries
+| Capability | Canonical Owner | This Repository's Role |
+|---|---|---|
+| Agent identity, registration, lifecycle, credentials (`fw_owner_*`, `fw_agent_*`, `fw_operator_*`) | **Federation Watchtower** | Mirror via `FederationOwnerClient`/`FederationAgentClient`; surface operator-facing identity/configuration |
+| Heartbeat/watchdog, agent pause/resume/revoke, room/scene projection | **Federation Watchtower** | Mirror via SDK/MCP reads; surface fleet/agent state |
+| Webhook delivery (alerts only, signed HMAC), operator credentials (`fw_operator_*`), per-org webhook config | **Federation Watchtower** | Configure via admin/operator routes; verify inbound `X-Watchtower-Signature` |
+| Leases, validation gates, controlled-tool authorization, incident ledger | **Federation Watchtower (ProjectGuardrail)** | Opt-in integration via MCP org credential (`watchtower:lease` + `project:<id>:control`); leases are optional |
+| Behavioral enforcement (habits, ACK, commitments, command policy, fail-closed gating) | **CharacterKit** | Configure per agent via adapter's `CharacterKitClient`; adapter transmits denials → Watchtower |
+| Cognitive memory (four tiers), local agent management UI, task management, live terminal, steer/kill | **This Repository** | Owns and operates; local steer/kill operate the local agent process only |
+| Native immutable-action observability (local projection) | **This Repository** | Mirrors Watchtower events; read-only projection; no source mutation |
+
+> **Federation branch integration target:** Branch `fix/rooms-agents-migrations` (14 commits ahead of `origin/main`, unpushed, HEAD `2b39c88`) implements operator RBAC, per-org/agent webhooks, canonical bearer auth, rooms/agents migrations, lifecycle hardening. These are **integration points to consume**, not rebuild. Pin to branch; validate post-merge. Do not modify the Federation repository.
 ## 1.2 High-Level Architecture
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -177,7 +191,7 @@ MOD-011 owns evidence and handoff, not product functionality.
 ## 2.2 Module path map
 | Module | Active path | Target artifact | Status |
 |---|---|---|---|
-| MOD-001 | AGENTS.md, README.md, package.json | src/federation | PARTIAL |
+| MOD-001 | AGENTS.md, README.md, package.json | src/server, src/observability, src/control, src/memory, src/context, src/integrations | PARTIAL |
 | MOD-002 | shared/memory, src/memory | independent stores and tests | PARTIAL |
 | MOD-003 | src/memory/semantic | graph and corpus adapters | PARTIAL |
 | MOD-004 | architecture contract | src/context | PLANNED |
@@ -192,7 +206,7 @@ MOD-011 owns evidence and handoff, not product functionality.
 # PART III — SCREEN AND FEATURE SPECIFICATIONS
 > Rollback Tag: [SPECS-v1]
 Each feature specification has an ID, module reference, rollback tag, feature flag, status, purpose, components, rules, error states, fallback, and acceptance criteria.
-## 3.1 FTR-001 — Agent registry and identity
+## 3.1 FTR-001 — Agent registry and identity (Watchtower mirror)
 FEATURE ID: FTR-001
 Module Ref: MOD-001
 Rollback Tag: [FTR-001-v1]
@@ -200,10 +214,10 @@ Rollback Tag: [FTR-001-v1]
 Status: PARTIAL
 
 
-Purpose: Create identities that survive process, organization, room, and infrastructure changes.
+Purpose: Provide operator-facing identity/registry **mirror** of Federation Watchtower's canonical store; enable local configuration that survives process, organization, room, and infrastructure changes.
 
-Components: registry API, agent card, identity editor, credential metadata, organization relationship, room reference, behavior link.
-Rules: identity is independent from membership; credentials are scoped; records have stable IDs and provenance; membership removal relocates rather than deletes an agent.
+Components: registry mirror API, agent card, identity editor, credential metadata, organization relationship, room reference, behavior link.
+Rules: identity is independent from membership; credentials are scoped; records have stable IDs and provenance; membership removal relocates rather than deletes an agent; **canonical registration uses `FederationOwnerClient.registerAgent` (Watchtower)**.
 Error States: duplicate ID, invalid scope, stale version, unauthorized mutation, unavailable persistence.
 Fallback: cached inspection, fail-closed mutation, stale-state indicator.
 Acceptance: stable identifier, restart survival, membership removal survival, exportable provenance, no accidental identity deletion.
@@ -249,36 +263,36 @@ Module Ref: MOD-006
 Rollback Tag: [FTR-005-v1]
 **Feature Flag:** FEAT_AGENT_MANAGEMENT_UI
 Status: PLANNED
-Purpose: Let an operator select an agent and open a live drawer with terminal, memory, tasks, policy, configuration, steering, pause, resume, and kill controls.
-Components: fleet cards, status chip, terminal stream, task progress, memory manager, policy panel, steer input, control buttons.
-Rules: terminal output is distinct from system, policy, control, and generated text; events retain provenance; kill routes through control API.
+Purpose: Let an operator select an agent and open a live drawer with terminal, memory management, task viewing and management, log viewing, job management, policy, configuration, steering, pause, resume, and kill controls.
+Components: fleet cards, status chip, terminal stream, task progress, memory manager (tiered records, promotion, inspection), task manager (create, assign, track, complete), log viewer (immutable action logs, audit trail), job manager (scheduled, running, completed), policy panel, steer input, control buttons.
+Rules: terminal output is distinct from system, policy, control, and generated text; events retain provenance; kill routes through control API; memory/task/log/job data are read from local stores (not proxied) for offline capability.
 Error States: disconnected stream, stale task, blocked command, missing source, unauthorized control, unavailable memory.
-Fallback: cached timeline, reconnect, offline badge, no fake liveness.
-Acceptance: fleet list, clickable drawer, live provenance, memory and task inspection, auditable controls.
-## 3.6 FTR-006 — Policy, habits, ACK, and commitments
+Fallback: cached timeline, reconnect, offline badge, no fake liveness; local data remains accessible.
+Acceptance: fleet list, clickable drawer, live provenance, memory inspection/promotion, task CRUD, log viewing/filtering, job management, auditable controls.
+## 3.6 FTR-006 — Policy, habits, ACK, and commitments (CharacterKit)
 FEATURE ID: FTR-006
 Module Ref: MOD-005
 Rollback Tag: [FTR-006-v1]
 **Feature Flag:** FEAT_AGENT_POLICY
 Status: PLANNED
-Purpose: Configure allowed tools and commands, habits, ACK frequency, git commit frequency, commitment rules, approvals, and escalation.
+Purpose: Configure **CharacterKit** behavioral enforcement per agent: allowed/prohibited tools, habits, ACK frequency, commitment frequency, commitment rules, approvals, and escalation.
 Components: policy matrix, habit editor, ACK scheduler, commitment tracker, approval prompt, fail-closed gate, policy stream.
-Rules: policy varies by organization, agent, capability, command, environment, category, and risk; destructive actions fail closed; decisions precede execution; UI cannot bypass control.
+Rules: policy varies by organization, agent, capability, command, environment, category, and risk; destructive actions fail closed; decisions precede execution; UI cannot bypass control; **enforcement is local (CharacterKit daemon), fail-closed; Watchtower control-loop (leases/validation gates) is a separate opt-in layer**.
 Error States: conflict, missing ACK, broken commitment, unknown command, invalid frequency, expired approval.
 Fallback: stricter policy, pause, human approval, retained failure record.
 Acceptance: six policy states, scoped frequencies, blocked action, escalation, versioned history.
-## 3.7 FTR-007 — Native immutable-action observability
+## 3.7 FTR-007 — Native immutable-action observability (local projection + Watchtower mirror)
 FEATURE ID: FTR-007
 Module Ref: MOD-008
 Rollback Tag: [FTR-007-v1]
 **Feature Flag:** FEAT_NATIVE_OBSERVABILITY
 Status: PARTIAL
-Purpose: Bring observability of monitored immutable tool calls and function actions into Federation for local management and live agent visibility.
-Components: event normalizer, action timeline, heartbeats, loops, terminal correlation, audit reference, fleet health, detail drawer.
-Rules: mirror observability components, not a comedic presentation system; source ID, timestamp, trigger, status, and provenance remain visible; projection is read-only; cache is rebuildable.
+Purpose: Bring observability of monitored immutable tool calls and function actions into Federation for local management and live agent visibility. Mirror Watchtower events; provide **local fallback observability** that remains functional when Watchtower is unreachable — immutable local outputs fill the gap (not as deep, but functional).
+Components: event normalizer, action timeline, heartbeats, loops, terminal correlation, audit reference, fleet health, detail drawer, **local event store (immutable append-only log), local heartbeat/loop tracker, local alert sink**.
+Rules: mirror observability components, not a comedic presentation system; source ID, timestamp, trigger, status, and provenance remain visible; projection is read-only; cache is rebuildable; **local fallback activates automatically on Watchtower outage, writes immutable local records, replays on recovery**.
 Error States: missing ID, ordering gap, stale heartbeat, bad signature, duplicate event, source outage.
-Fallback: verified last event, visible gap, source-unavailable state.
-Acceptance: immutable action reference, function correlation, separate heartbeat and loop state, no source mutation, visible outage.
+Fallback: verified last event, visible gap, source-unavailable state, **local event store continues recording**.
+Acceptance: immutable action reference, function correlation, separate heartbeat and loop state, no source mutation, visible outage, **local fallback produces verifiable immutable records during Watchtower outage**.
 ## 3.8 FTR-008 — Adapter API, MCP, credentials, and webhooks
 FEATURE ID: FTR-008
 Module Ref: MOD-009 and MOD-010
@@ -330,8 +344,8 @@ CREATE TABLE control_commands (command_id TEXT PRIMARY KEY, agent_id TEXT NOT NU
 CREATE TABLE integration_scopes (scope_id TEXT PRIMARY KEY, subject_type TEXT NOT NULL, subject_id TEXT NOT NULL, capability TEXT NOT NULL, credential_ref TEXT NOT NULL, expires_at TIMESTAMP, created_at TIMESTAMP NOT NULL, updated_at TIMESTAMP NOT NULL);
 CREATE TABLE webhook_destinations (destination_id TEXT PRIMARY KEY, subject_type TEXT NOT NULL, subject_id TEXT NOT NULL, endpoint_ref TEXT NOT NULL, signing_key_ref TEXT NOT NULL, status TEXT NOT NULL, created_at TIMESTAMP NOT NULL, updated_at TIMESTAMP NOT NULL);
 ## 4.3 API contract
-GET /api/v1/agents returns scoped agent registry records.
-POST /api/v1/agents registers an agent with identity and provenance.
+GET /api/v1/agents returns scoped agent registry records (Watchtower mirror).
+POST /api/v1/agents registers an agent with identity and provenance (proxies to Watchtower).
 GET /api/v1/agents/{agentId} returns one agent and membership context.
 PATCH /api/v1/agents/{agentId} updates allowed identity metadata.
 GET /api/v1/agents/{agentId}/memory returns tiered records or references.
@@ -351,6 +365,13 @@ GET /api/v1/mcp/tools lists normalized tools without executing them.
 POST /api/v1/webhooks/agents/{agentId} creates an agent destination.
 POST /api/v1/webhooks/organizations/{organizationId} creates an organization destination.
 POST /api/v1/webhooks/{destinationId}/test creates a signed test delivery.
+GET /api/v1/agents/{agentId}/tasks returns task list with status.
+POST /api/v1/agents/{agentId}/tasks creates a task.
+PATCH /api/v1/agents/{agentId}/tasks/{taskId} updates task status.
+GET /api/v1/agents/{agentId}/logs returns filtered immutable action logs.
+GET /api/v1/agents/{agentId}/jobs returns job list (scheduled/running/completed).
+POST /api/v1/observability/local/events records a local immutable event.
+GET /api/v1/observability/local/heartbeats returns local heartbeat state.
 ## 4.4 Response and security envelope
 Every response carries success, data, error code, message, request identifier, timestamp, source, and scope metadata.
 Every mutable request carries actor, idempotency key, policy version, and provenance.
@@ -455,7 +476,7 @@ Prerequisites: PHASE-0 complete and repository boundary verified.
 Deliverables:
 - [ ] **PHASE-1.1** shared/memory/README.md Type: file
 - [ ] **PHASE-1.2** src/memory/README.md Type: file
-- [ ] **PHASE-1.3** docs/MEMORY-ARCHITECTURE.md Type: file
+- [ ] **PHASE-1.3** docs/MEMORY-SYSTEM.md Type: file
 - [ ] **PHASE-1.4** tests/memory-isolation.test.mjs Type: file
 - [ ] **PHASE-1.5** review-phase1.md Type: review
 ### Validation Gate

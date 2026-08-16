@@ -1,0 +1,29 @@
+# Publish the compiled adapter package, not its development tree.
+node_modules/
+build/
+*.tsbuildinfo
+
+# Tests, coverage, and local tooling
+tests/
+coverage/
+.nyc_output/
+*.lcov
+test-results/
+tsconfig.json
+.github/
+
+# Environment, logs, and local state
+.env
+.env.*
+!.env.example
+*.local
+*.log
+*.pid
+.scratch/
+.tmp/
+.temp/
+
+# Development-only documentation and source maps
+src/
+docs/
+*.map

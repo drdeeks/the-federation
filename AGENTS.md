@@ -9,7 +9,8 @@ Work only inside `/home/drdeek/projects/hackathon` for this project.
 
 - Do not inspect, edit, commit, push, deploy, or configure sibling projects
   unless the owner explicitly authorizes that separate operation.
-- Federation Watchtower and Agent Character Kit are integration points. Use
+- `@federation-watchtower/sdk` and `@drdeeks/character-kit` are integration
+  points. Use
   documented interfaces; do not silently modify their repositories here.
 - Preserve existing user changes. Inspect `git status` before editing.
 - Never push or commit unless explicitly requested.
@@ -81,13 +82,13 @@ Memory, retrieval, policy, habits, ACKs, commitments, local controls (steer, pau
 
 ### Integration points
 
-- **Federation Watchtower** owns agent identity, registration, lifecycle, credentials (`fw_owner_*`, `fw_agent_*`, `fw_operator_*`), heartbeat/watchdog, room/scene projection, webhook delivery (alerts only, signed HMAC), operator credentials, per-org webhook config, leases, validation gates, controlled-tool authorization, and incident ledger. Federation mirrors these via SDK/MCP; does not reproduce Watchtower's canonical records.
-- **CharacterKit** owns behavioral configuration and fail-closed enforcement (habits, ACK, commitments, command policy). It does not own Federation identity, memory, organizations, or UI.
+- **`@federation-watchtower/sdk`** represents Watchtower's canonical agent identity, registration, lifecycle, credentials (`fw_owner_*`, `fw_agent_*`, `fw_operator_*`), heartbeat/watchdog, room/scene projection, webhook delivery (alerts only, signed HMAC), operator credentials, per-org webhook config, leases, validation gates, controlled-tool authorization, and incident ledger. Federation mirrors these via SDK/MCP; does not reproduce Watchtower's canonical records.
+- **`@drdeeks/character-kit`** owns behavioral configuration and fail-closed enforcement (habits, ACK, commitments, command policy). It does not own Federation identity, memory, organizations, or UI.
 - **Google ADK/Gemini and cloud services** are implementation components for the current foundation slice, not the product definition.
 
-### Adapter
+### `@the-federation/adapter`
 
-The adapter translates and normalizes CharacterKit enforcement activity into
+The adapter translates and normalizes `@drdeeks/character-kit` enforcement activity into
 Watchtower events and may relay Watchtower results as adapter-visible facts. It
 owns no independent identity, policy, memory, lease decision, or source of
 truth. It is the only cross-system layer and is disposable.
@@ -140,12 +141,13 @@ remain incomplete. Keep product direction ambitious and implementation claims
 factual.
 
 **Current Watchtower integration snapshot:** the inspected sibling branch is
-`fix/rooms-agents-migrations`, observed at HEAD `4c13601`. Its current SDK
+`fix/rooms-agents-migrations`, observed at HEAD `4c13601`. The current
+`@federation-watchtower/sdk`
 includes `FederationOwnerClient`, `FederationAgentClient` lease methods, and
 `FederationOperatorClient`. These are Watchtower-owned integration points; they
 are consumed here and not rebuilt in Federation.
 
-The adapter is newly built and remains a pure translator: CharacterKit
+The adapter is newly built and remains a pure translator: `@drdeeks/character-kit`
 enforcement activity becomes normalized Watchtower events, and external
 results may become adapter-visible facts. It owns no policy, identity, memory,
 lease decision, operator management, or canonical record.

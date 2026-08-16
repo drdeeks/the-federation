@@ -18,7 +18,7 @@ in `FEDERATION-CONCEPT.md`; current evidence lives in `PROJECT-STATUS.md`.
 
 ## Pre-existing integration points
 
-### Federation Watchtower
+### `@federation-watchtower/sdk` / Federation Watchtower
 
 Watchtower is the canonical external operational plane. It owns agent
 registration and identity credentials, lifecycle, heartbeats, watchdogs,
@@ -40,15 +40,15 @@ Watchtower MCP is a separate Streamable HTTP surface at `/mcp`. It uses an
 organization credential with project-scoped read/control permissions. MCP is
 not agent identity and is not interchangeable with `fw_agent_*` credentials.
 
-### CharacterKit / ACK
+### `@drdeeks/character-kit`
 
-CharacterKit owns habits, acknowledgments, commitments, command policy, and
+`@drdeeks/character-kit` owns habits, acknowledgments, commitments, command policy, and
 local fail-closed enforcement. Federation owns the surrounding identity,
 memory, management, and presentation experience.
 
 ## Adapter boundary
 
-The adapter is newly built and disposable. It is a translator, not a policy
+`@the-federation/adapter` is newly built and disposable. It is a translator, not a policy
 engine:
 
 ```text

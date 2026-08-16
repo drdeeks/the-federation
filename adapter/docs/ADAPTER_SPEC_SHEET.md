@@ -1,6 +1,9 @@
 # Character Kit ⇄ Watchtower Bridge — Definitive Blueprint
 
-**Status as of 2026-08-13, later same day (cross-checked against `AGENTS.md` §8, same date — read that section for the authoritative, continuously-updated status; this header is a snapshot, not the source of truth):**
+**Historical status snapshot:** this document is retained as an engineering
+record, not current status authority. Current adapter status is maintained in
+the canonical `watchtower-ack-adapter` package documentation and the
+Federation repository's `docs/PROJECT-STATUS.md`.
 
 | Phase | This blueprint's plan | Actual status |
 |---|---|---|
@@ -12,9 +15,14 @@
 | 5 — Failure hardening | §10 | Fail-closed **logic** done + unit-tested; live crash/network simulation not yet integration-tested |
 | 6 — Deployment topology | §10 | **NOT started** |
 
-Tests: 20/20 unit pass, `tsc --noEmit` clean (was 12/12 before Phase 2 landed). New coverage: `tests/character-kit.test.ts` runs the real socket transport against a fake daemon speaking the actual wire protocol. Still no live network test, no real `agent_enforcer_daemon.js` process, no real Watchtower endpoint exercised in any test.
+Current verification is maintained by the canonical package's documented
+validation commands and tests. This historical snapshot does not override
+those records.
 
-**Read `docs/symbol-matrix.md` before touching Phase 2/3 further** — it already has the verified upstream symbol names (`Enforcer.execute_tool`, `EnforcerClient(socket_path)`, `WatchtowerClient.emitEvent`, `FederationOwnerClient.registerAgent`, `FederationAgentClient.connect/heartbeat/disconnect/emit`, etc.) that this blueprint's §9 asks for. **Read `docs/FEDERATION_ROUTE_MAP.md` before touching Phase 3's credential model** — it maps every Federation route this bridge could call against canonical-vs-legacy auth, cross-referenced against `~/projects/federation/docs/review/COMPLETE_SPEC.md`, and lists exactly what's an adapter-side gap (most of it) vs. a genuine Federation-side gap (four specific routes with no canonical bearer path yet).
+Read `docs/symbol-matrix.md` and the current `docs/FEDERATION_ROUTE_MAP.md`
+before changing the bridge. The adapter is translator-only; Watchtower owner,
+agent lease, operator, MCP, and control surfaces belong to Federation/Watchtower
+integration layers.
 
 ---
 

@@ -1,8 +1,8 @@
 {
-  "name": "@mycelium-collective/shared-memory",
+  "name": "@the-federation/shared-memory",
   "version": "0.1.0",
   "type": "module",
-  "description": "Extracted, scrubbed memory core (mnemosyne) — ESM scoped package.",
+  "description": "Reusable, storage-agnostic memory engine for Federation-compatible agents.",
   "main": "index.js",
   "private": true
 }

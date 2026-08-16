@@ -1,6 +1,6 @@
 // tests/memory-isolation.test.mjs — PHASE-1 deliverable (blueprint.md PHASE-1.4).
 //
-// Tests the isolation rules docs/MEMORY-ARCHITECTURE.md §2 actually states,
+// Tests the isolation rules docs/MEMORY-SYSTEM.md §2 actually states,
 // against what currently exists in code -- not against subsystems that are
 // still empty directories. Per that document's own §11 "Current repository
 // mapping": episodic, declarative/long-term, and knowledge-graph APIs, the
@@ -112,7 +112,7 @@ test('document indexer excludes memory, knowledge, and secrets directories from 
     await writeFile(join(workspace, 'corpus', 'onboarding.md'), '# Onboarding\nThis is a real user-supplied document.');
 
     // Agent-internal state -- must never be indexed as corpus, per
-    // docs/MEMORY-ARCHITECTURE.md SS7 ("must exclude agent-internal state
+    // docs/MEMORY-SYSTEM.md SS7 ("must exclude agent-internal state
     // such as memory, knowledge, identity, habits, secrets").
     await mkdir(join(workspace, 'memory'), { recursive: true });
     await writeFile(join(workspace, 'memory', 'private-note.md'), '# Private\nThis must never appear in the corpus index.');
@@ -141,7 +141,7 @@ test('document indexer excludes memory, knowledge, and secrets directories from 
 });
 
 // ── Not yet buildable: honest, visible skips, not silent omission ──────────
-// docs/MEMORY-ARCHITECTURE.md SS11 lists these as "not yet integrated and
+// docs/MEMORY-SYSTEM.md SS11 lists these as "not yet integrated and
 // must not be described as complete." Each skip below names the exact
 // missing module so this file stops skipping it the moment that changes.
 

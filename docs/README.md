@@ -8,7 +8,7 @@ Federation. It is separate from source code and subsystem-local documentation.
 - `FEDERATION-CONCEPT.md` — product and civilization source of truth.
 - `BUILD_SCOPE.md` — current foundation-layer scope and acceptance path.
 - `INTEGRATION_MAP.md` — current ownership and integration inventory.
-- `MEMORY-ARCHITECTURE.md` — canonical boundary for the two memory systems.
+- `MEMORY-SYSTEM.md` — canonical boundary for the two memory systems.
 - `PROVENANCE.md` — truthful disclosure and attribution guardrails.
 - `DOCTRINE-BINDING.md` — universal doctrine binding.
 - `SUBMISSION-GUARDRAILS.md` — submission safety rules.

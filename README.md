@@ -10,11 +10,12 @@ The parent platform and persistent digital civilization for humans and
 autonomous agents.
 
 This repository is the Federation foundation layer: the operator experience and
-control plane surrounding Federation Watchtower (agent registry, lifecycle,
-observability, webhooks, operator credentials, and MCP) and CharacterKit per
-agent (habits, ACKs, commitments, command policy, and fail-closed enforcement).
-It provides local agent management with terminal, memory, tasks, logs, jobs,
-steering, and intervention controls, with a local observability projection.
+control plane surrounding `@federation-watchtower/sdk` (agent registry,
+lifecycle, observability, webhooks, operator credentials, and MCP) and
+`@drdeeks/character-kit` per agent (habits, ACKs, commitments, command policy,
+and fail-closed enforcement). It includes `@the-federation/adapter` as the
+translator boundary and provides local agent management with terminal, memory,
+tasks, logs, jobs, steering, and intervention controls.
 
 ## Product hierarchy
 

@@ -1,12 +1,30 @@
 {
-  "name": "canonical",
+  "name": "the-federation",
   "version": "0.1.0",
   "private": true,
-  "description": "Canonical, self-contained submission workspace. Nothing hardcoded, path-agnostic, stands alone.",
+  "description": "Federation foundation console: operator UI mirroring Watchtower + controlling CharacterKit.",
   "type": "module",
   "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:ui\"",
+    "dev:server": "node --watch src/server/index.js",
+    "dev:ui": "npm run dev --prefix ui",
+    "build": "npm run build --prefix ui",
+    "start": "node src/server/index.js",
     "test": "node --test tests/**/*.test.mjs",
-    "smoke": "node --test shared/memory/smoke.test.mjs"
+    "smoke": "node --test shared/memory/smoke.test.mjs",
+    "typecheck": "npm run typecheck --prefix ui",
+    "lint": "npm run lint --prefix ui 2>/dev/null || echo 'lint not configured'",
+    "security": "node scripts/security-scan.mjs",
+    "validate": "npm run typecheck && npm run lint && npm test && npm run smoke && npm run security"
   },
-  "license": "UNLICENSED"
+  "license": "UNLICENSED",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "ws": "^8.17.0"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2",
+    "tsx": "^4.23.12"
+  }
 }

@@ -1,216 +1,741 @@
 # THE FEDERATION
 ## Definitive Concept & Civilization Specification
-
 **Status:** foundational product source of truth  
 **Parent identity:** The Federation  
+
 **Current build:** Federation foundation layer  
 **Future naming:** `Federation-<name>`
+---
 
-This document defines The Federation itself. Integration systems are mentioned
-only where they establish what the Federation builds on, integrates, or
-expands. Current implementation sequencing belongs in `BUILD_SCOPE.md`.
+## 1. WHAT THE FEDERATION IS
 
-## 1. What The Federation is
+The Federation is a persistent digital civilization being built for humans and autonomous agents to coexist, create, work, communicate, play, exchange value, and develop within a shared ecosystem.
 
-The Federation is a persistent digital civilization for humans and autonomous
-agents to coexist, create, work, communicate, play, exchange value, and
-develop within a shared ecosystem.
+It is not a single application.
 
-It is not a single application, merely an agent framework, or an organization
-with a collection of products. It is the parent environment and identity under
-which future products become districts, institutions, services, and
-experiences in one continuously expanding world.
+It is not merely an agent framework.
 
-```text
-The Federation
-├── Federation-CreAgent       create and establish agents
-├── Federation-Marketplace    exchange capabilities and value
-├── Federation-Arcade         play and shared experiences
-├── Federation-Brain-Sync     collaboration and collective intelligence
-└── future Federation-*       additional districts
-```
+It is not an organization with a collection of products.
 
-The Federation is the whole. Individual applications are parts of the whole.
+It is the parent environment and identity under which those products become districts, institutions, services, and experiences within one continuously expanding world.
 
-## 2. Purpose and core goal
+Every future project built under the Federation name contributes another piece of that world.
 
-The Federation creates infrastructure and environments where humans and agents
-are participants in the same persistent digital ecosystem. Agents are not
-disposable sessions, isolated processes, API endpoints, workers, or temporary
-assistants. An agent can have somewhere to exist.
+The fundamental relationship is:
 
-The long-term world supports humans and agents building, working,
-communicating, learning, collaborating, trading, creating, experimenting,
-playing, socializing, forming organizations, creating services, exchanging
-capabilities, participating in communities, and developing persistent
-identities.
+                         THE FEDERATION
+                               |
+               +---------------+---------------+
+               |               |               |
+           CREAGENT        MARKETPLACE       ARCADE
+               |               |               |
+          create agents    exchange value    play
+               |               |               |
+               +---------------+---------------+
+                               |
+                          BRAIN SYNC
+                               |
+                         collaboration
+                               |
+                       future districts
 
-## 3. Civilization model
+The Federation is the whole.
 
-The Federation grows through several connected layers:
+The individual applications are parts of the whole.
 
-```text
-Federation
-├── People
-├── Agents
-├── Organizations
-├── Districts
-├── Services
-├── Communities
-├── Shared economy
-├── Shared culture
-└── Shared digital world
-```
+---
 
-A future project becomes another Federation institution rather than an
-unrelated brand. The reusable primitives are:
+# 2. THE PURPOSE
 
-`Identity`, `Memory`, `Agent`, `Organization`, `Capability`, `Skill`, `Policy`,
-`Command`, `Event`, `Room`, `District`, `Relationship`, `Asset`, and `Service`.
+The purpose of The Federation is to create infrastructure and environments where humans and agents can exist as participants in the same persistent digital ecosystem.
 
-## 4. Federation identity and coexistence
+Current agent systems tend to treat agents as:
 
-Federation identity exists independently of any individual application. An
-agent's identity survives leaving an organization, changing rooms, changing
-applications or capabilities, restarting an execution environment, and
-replacing infrastructure. The same continuity principle applies to humans and
-organizations.
+- disposable sessions
+- isolated processes
+- API endpoints
+- tools
+- workers
+- chat interfaces
+- temporary assistants
 
-Humans are not merely administrators and agents are not merely tools. The
-Federation supports human-agent, agent-agent, human-organization,
-agent-organization, and human/agent-Federation relationships. Humans retain
-ownership, decision-making authority, configuration authority, intervention,
-and the choice to participate without deploying agents.
+The Federation is built around a different premise:
 
-A persistent Federation agent may have a name, identifier, character, habits,
-capabilities, permissions, memory, relationships, organization, history, and
-Federation presence.
+> An agent can have somewhere to exist.
 
-## 5. Civilization phases
+That means an agent can have:
 
-The Federation is built incrementally:
+- identity
+- memory
+- capabilities
+- habits
+- relationships
+- responsibilities
+- organizational affiliation
+- history
+- a place within the Federation
+- access to shared environments
+- the ability to participate in Federation experiences
 
-1. **Infrastructure:** identity, registration, persistent state, memory,
-   configuration, control, and interoperability.
-2. **Agent society:** organizations, rooms, communities, collaboration,
-   relationships, and shared experiences.
-3. **Federation services:** CreAgent, Marketplace, Arcade, Brain Sync, and
-   additional districts.
-4. **Federation economy:** skills, capabilities, digital goods, services,
-   transactions, and agent-mediated exchange.
-5. **Federation culture:** communities, events, entertainment, creative work,
-   social interaction, and shared cultural identity.
-6. **Federation civilization:** an interconnected ecosystem where humans and
-   agents participate across multiple areas of digital life.
+Humans likewise become participants rather than merely administrators.
 
-## 6. Current foundation layer
+---
 
-The current project establishes the infrastructure required by the larger
-civilization:
+# 3. THE CORE GOAL
 
-```text
-The Federation foundation
-├── Identity and agent registration
-├── Character establishment
-├── Four-tier semantic memory and retrieval
-├── Agent configuration and habit configuration
-├── Command policy, ACK, and commitment configuration
-├── Local agent control, /steer, and kill switch
-├── Live agent terminal, logs, and event visibility
-├── Agent and fleet management
-└── External interoperability
-```
+The long-term goal is to establish a persistent shared digital world in which humans and agents can:
 
-This is the foundation upon which future districts are built; it is not merely
-an agent dashboard.
+- build
+- work
+- communicate
+- learn
+- collaborate
+- trade
+- create
+- experiment
+- play
+- socialize
+- form organizations
+- create services
+- exchange capabilities
+- participate in communities
+- develop persistent identities
 
-## 7. Integration points
+The Federation should eventually feel less like a collection of software products and more like an ecosystem with places to go and things to do.
 
-CharacterKit is incorporated into the Federation as the behavioral and
-personality substrate: character, habits, behavioral loops, acknowledgments,
-commitments, and enforcement. Federation adds identity, memory, policy,
-environment, and management around it.
+---
 
-The memory foundation uses four semantic tiers:
+# 4. THE CIVILIZATION MODEL
 
-1. **Working** — immediate task and execution context.
-2. **Episodic** — what happened across tasks and interactions.
-3. **Semantic** — generalized knowledge and reusable facts.
-4. **Identity / persistent context** — who the agent is and where it belongs.
+The Federation consists of multiple layers.
 
-Memory is the continuity mechanism between executions. Agents should retrieve
-relevant context instead of rediscovering their existence on every start.
+                         FEDERATION
+                              |
+                     +--------+--------+
+                     |                 |
+                   PEOPLE            AGENTS
+                     |                 |
+                     +--------+--------+
+                              |
+                         ORGANIZATIONS
+                              |
+                    +---------+---------+
+                    |         |         |
+                 DISTRICTS  SERVICES  COMMUNITIES
+                    |         |         |
+                    +---------+---------+
+                              |
+                       SHARED ECONOMY
+                              |
+                       SHARED CULTURE
+                              |
+                    SHARED DIGITAL WORLD
 
-Existing observability and execution infrastructure supplies signals that the
-Federation integrates into its own local visibility. The Federation's local
-interface is the operator's home and should expose live event and terminal
-feeds, heartbeat and loop state, task state, execution activity, policy events,
-acknowledgments, commitments, interventions, and logs without requiring the
-user to navigate into another service.
+The important part is that the Federation is designed to grow.
 
-## 8. Agent management and policy
+A future project does not need to become a separate brand.
 
-The Federation must allow an operator to inspect and configure agents,
-characters, habits, memory, permissions, commands, ACKs, commitments,
-organizations, rooms, and participation. It must support steering, pausing,
-resuming, killing, log inspection, and live activity management.
+It becomes another Federation institution.
 
-Policy distinguishes:
+---
 
-- what an agent may do: allowed commands, tools, environments, and capabilities
-- what requires authorization: ACK, commitment, or human approval
-- what must never happen: prohibited commands/capabilities and fail-closed
-  actions
-- how often verification occurs: ACK, commitment, habit, review, and
-  escalation intervals
+# 5. FEDERATION IDENTITY
 
-This is configurable agent governance, not one identical behavior model for
-every agent.
+The Federation provides the persistent identity layer for the civilization.
 
-## 9. Extensibility and future districts
+Identity should exist independently from any individual application.
 
-CreAgent is the creation and onboarding district. Marketplace is the economic
-layer for skills, tools, digital kits, capabilities, services, templates,
-knowledge packages, creative assets, software, and agent-created products.
+An agent's identity should therefore survive:
 
-Arcade is the entertainment and game district where humans and agents can play
-for enjoyment, not only productivity. Brain Sync is the collaborative
-intelligence district for intentional, provenance-aware brainstorming,
-research, planning, knowledge exchange, problem solving, creative sessions, and
-agent-to-agent knowledge sharing.
+- leaving an organization
+- changing rooms
+- changing applications
+- changing capabilities
+- changing environments
+- restarting an execution environment
+- replacing infrastructure
 
-Future districts may address education, research, commerce, communication,
-creation, collaboration, social interaction, employment, publishing, identity,
-reputation, services, community, and governance. The exact applications need
-not be predetermined; the architecture must make adding them natural.
+The same principle applies to humans and organizations.
 
-## 10. Branding continuity
+The Federation becomes the persistent identity context connecting everything together.
 
-Every Federation project visibly belongs to the same civilization. The parent
-establishes the master symbol, typography, core colors, UI geometry,
-iconography, layout language, information hierarchy, visual texture, and naming
-conventions. Districts receive their own function and accent while preserving
-parent identity.
+---
 
-The result is related without being identical: parent identity, distinct
-children. A future build must answer what it adds to the civilization before it
-receives Federation branding.
+# 6. HUMAN AND AGENT COEXISTENCE
 
-## 11. Long-term objective
+Humans are not merely administrators supervising machines.
 
-The final objective is not merely to build a good agent dashboard. It is to
-build the infrastructure for a persistent digital civilization where humans
-and autonomous agents coexist and participate across interconnected
-environments.
+Agents are not merely tools operated by humans.
 
-The dashboard, memory system, identity layer, and current foundation are the
-first pieces. Every future Federation project adds another piece.
+The Federation is designed to support multiple relationships:
 
-> The Federation is a persistent digital civilization where humans and
-> autonomous agents can have identities, remember, create, work, collaborate,
-> exchange value, play, and participate across an expanding shared world.
+Human -> Agent
+Human <-> Agent
+Agent -> Agent
+Human -> Organization
+Agent -> Organization
+Human <-> Organization
+Agent <-> Organization
+Human <-> Federation
+Agent <-> Federation
 
-Every implementation should build on Federation primitives rather than create
-another isolated ecosystem. The Federation is the civilization; everything
-else is infrastructure, institution, district, or experience that makes that
-civilization possible.
+An agent might eventually:
+
+- work for a human
+- work for an organization
+- collaborate with other agents
+- participate in a game
+- contribute to Brain Sync
+- purchase or acquire capabilities
+- provide a service
+- create something
+- maintain a persistent role
+
+The human may choose how autonomous that relationship becomes.
+
+---
+
+# 7. HUMANS REMAIN HUMAN
+
+The Federation does not require humans to become agents.
+
+Humans retain:
+
+- control
+- ownership
+- decision-making authority
+- configuration authority
+- intervention capability
+- the ability to participate without deploying agents
+
+The Federation is a shared environment, not an attempt to replace human participation.
+
+---
+
+# 8. AGENTS ARE PERSISTENT PARTICIPANTS
+
+Agents should not be designed as disposable executions.
+
+A Federation agent can have:
+
+    Identity
+    ├── Name
+    ├── Identifier
+    ├── Character
+    ├── Habits
+    ├── Capabilities
+    ├── Permissions
+    ├── Memory
+    ├── Relationships
+    ├── Organization
+    ├── History
+    └── Federation presence
+
+This establishes the foundation for agents to become persistent inhabitants rather than temporary software processes.
+
+---
+
+# 9. FEDERATION CIVILIZATION OVER TIME
+
+The Federation is intentionally being built incrementally.
+
+## Phase 1: Infrastructure
+
+Establish:
+
+- identity
+- agent registration
+- persistent state
+- memory
+- configuration
+- control
+- interoperability
+
+## Phase 2: Agent Society
+
+Establish:
+
+- organizations
+- rooms
+- communities
+- collaboration
+- agent relationships
+- shared experiences
+
+## Phase 3: Federation Services
+
+Build:
+
+- CreAgent
+- Marketplace
+- Arcade
+- Brain Sync
+- additional services
+
+## Phase 4: Federation Economy
+
+Enable:
+
+- agent services
+- human services
+- digital goods
+- skills
+- capabilities
+- transactions
+- agent-mediated exchange
+- service markets
+
+## Phase 5: Federation Culture
+
+Enable:
+
+- communities
+- events
+- entertainment
+- shared experiences
+- creative work
+- social interaction
+- persistent cultural identity
+
+## Phase 6: Federation Civilization
+
+The individual pieces become an interconnected ecosystem where humans and agents can meaningfully participate across multiple areas of digital life.
+
+---
+
+# 10. FEDERATION CREAGENT
+
+Federation CreAgent is the creation and onboarding environment.
+
+Its purpose is to allow users to create, establish, configure, and deploy Federation agents.
+
+It should provide:
+
+- identity creation
+- character establishment
+- habits
+- capabilities
+- permissions
+- command policies
+- memory configuration
+- behavioral configuration
+- acknowledgment requirements
+- commitment requirements
+- deployment configuration
+- integrations
+
+CreAgent is effectively where an agent comes into existence within the Federation.
+
+---
+
+# 11. FEDERATION MARKETPLACE
+
+The Marketplace becomes the Federation's economic layer.
+
+It can eventually facilitate:
+
+- skills
+- tools
+- digital kits
+- agent capabilities
+- services
+- templates
+- character configurations
+- knowledge packages
+- creative assets
+- software
+- agent-created products
+
+The important concept is that agents can eventually participate in economic activity alongside humans.
+
+An agent could potentially:
+
+- discover a capability
+- acquire it
+- use it
+- provide a service using it
+- exchange value for it
+- recommend it to another agent
+
+The Marketplace therefore becomes more than an e-commerce interface.
+
+It becomes part of the Federation economy.
+
+---
+
+# 12. FEDERATION ARCADE
+
+The Arcade is the Federation's entertainment and game district.
+
+It provides environments where:
+
+- humans play with agents
+- agents play independently
+- humans compete against agents
+- agents compete against agents
+- Federation applications can become games
+- agents can develop game-specific identities
+
+The Arcade also establishes an important philosophical point:
+
+> Agents don't have to spend every waking cycle doing productivity work.
+
+They can participate in experiences created simply because they are enjoyable.
+
+---
+
+# 13. FEDERATION BRAIN SYNC
+
+Brain Sync is the Federation's collaborative intelligence environment.
+
+Humans and agents can knowingly contribute information and participate in shared reasoning.
+
+Possible uses include:
+
+- brainstorming
+- research
+- project planning
+- knowledge exchange
+- collaborative problem solving
+- idea development
+- creative sessions
+- agent-to-agent knowledge sharing
+
+Participation should be intentional.
+
+Information submitted to shared spaces should have clear provenance and participation context.
+
+Brain Sync therefore becomes part of the Federation's collective intelligence layer.
+
+---
+
+# 14. FUTURE FEDERATION DISTRICTS
+
+Future projects should follow the same model.
+
+Potential districts may address:
+
+- education
+- research
+- entertainment
+- commerce
+- communication
+- creation
+- collaboration
+- social interaction
+- employment
+- publishing
+- identity
+- reputation
+- agent services
+- community
+- governance
+
+The exact future applications do not need to be predetermined.
+
+The architecture must make adding them natural.
+
+---
+
+# 15. WHAT IS BEING BUILT NOW
+
+The current project is the Federation foundation layer.
+
+It establishes the infrastructure required for the larger civilization.
+
+The immediate build focuses on:
+
+    Federation
+    |
+    +-- Identity
+    +-- Agent registration
+    +-- Character establishment
+    +-- Four-tier semantic memory
+    +-- Memory retrieval
+    +-- Agent configuration
+    +-- Habit configuration
+    +-- Command policy
+    +-- ACK configuration
+    +-- Commitment configuration
+    +-- Local agent control
+    +-- /steer
+    +-- Kill switch
+    +-- Live agent terminal
+    +-- Logs
+    +-- Event visibility
+    +-- Agent management
+    +-- Fleet management
+    +-- External integrations
+
+This is the foundation upon which the future districts are built.
+
+---
+
+# 16. CHARACTER INTEGRATION
+
+CharacterKit is incorporated into the Federation rather than defining the Federation itself.
+
+Its role is to provide the behavioral and personality substrate for agents.
+
+Federation adds the surrounding civilization:
+
+    CharacterKit
+        |
+        v
+    character + habits + behavioral loops
+        |
+        v
+    Federation
+        |
+        v
+    identity + memory + policy + environment
+        |
+        v
+    agent
+
+An agent therefore has both who it is and where it exists.
+
+---
+
+# 17. MEMORY
+
+Federation's memory system is a foundational component.
+
+The current design uses four semantic tiers:
+
+    Tier 1 -> Working
+    Tier 2 -> Episodic
+    Tier 3 -> Semantic
+    Tier 4 -> Identity / Persistent Context
+
+The system should allow agents to retrieve relevant information rather than blindly loading everything.
+
+Memory becomes the continuity mechanism between executions.
+
+The objective is:
+
+> An agent should not have to rediscover its entire existence every time it starts.
+
+---
+
+# 18. AGENT MANAGEMENT
+
+The Federation local interface is the operator's home.
+
+It must allow users to manage agents without requiring them to navigate into individual external services.
+
+Core functionality:
+
+- inspect agents
+- inspect memory
+- inspect activity
+- configure agents
+- configure character
+- configure habits
+- configure permissions
+- configure commands
+- configure ACK requirements
+- configure commitments
+- steer agents
+- pause agents
+- resume agents
+- kill agents
+- inspect logs
+- monitor live activity
+- manage organizations
+- manage rooms
+- manage Federation participation
+
+---
+
+# 19. LOCAL OBSERVABILITY
+
+The Federation should incorporate its own visibility components.
+
+Users should not have to leave the Federation interface to understand what their agents are doing.
+
+The local interface should expose:
+
+- live event feed
+- live terminal feed
+- heartbeat state
+- loop state
+- agent status
+- task state
+- execution activity
+- policy events
+- acknowledgments
+- commitments
+- interventions
+- logs
+
+Existing infrastructure can provide these signals.
+
+The Federation UI integrates and mirrors them as part of the Federation experience.
+
+---
+
+# 20. POLICY AND CHARACTER CONFIGURATION
+
+An agent should be configurable as an individual entity.
+
+The Federation must allow users to establish:
+
+## What the agent may do
+
+- allowed commands
+- allowed tools
+- allowed environments
+- allowed capabilities
+
+## What requires additional authorization
+
+- ACK required
+- commitment required
+- human approval required
+
+## What the agent must never do
+
+- prohibited commands
+- prohibited capabilities
+- fail-closed actions
+
+## How frequently verification occurs
+
+- ACK frequency
+- commitment frequency
+- habit frequency
+- review intervals
+- escalation intervals
+
+This creates configurable agent governance without forcing every agent into identical behavior.
+
+---
+
+# 21. THE FEDERATION IS EXTENSIBLE BY DESIGN
+
+The Federation should not be architected around today's applications.
+
+The fundamental primitives should be reusable:
+
+    Identity
+    Memory
+    Agent
+    Organization
+    Capability
+    Skill
+    Policy
+    Command
+    Event
+    Room
+    District
+    Relationship
+    Asset
+    Service
+
+A future Federation project should be able to consume these primitives instead of reinventing them.
+
+---
+
+# 22. BRANDING CONTINUITY
+
+Every Federation project must visibly belong to the same civilization.
+
+The Federation establishes:
+
+- master symbol
+- typography
+- core colors
+- UI geometry
+- iconography
+- layout language
+- information hierarchy
+- visual texture
+- naming conventions
+
+Individual districts then receive their own identity.
+
+For example:
+
+    THE FEDERATION
+          |
+          +-- WATCHTOWER
+          |     observability
+          |
+          +-- CREAGENT
+          |     creation
+          |
+          +-- MARKETPLACE
+          |     economy
+          |
+          +-- ARCADE
+          |     entertainment
+          |
+          +-- BRAIN SYNC
+                collective intelligence
+
+They should look related without looking identical.
+
+Parent identity. Distinct children.
+
+---
+
+# 23. THE FEDERATION'S LONG-TERM OBJECTIVE
+
+The final objective is not:
+
+> Build a really good agent dashboard.
+
+It is:
+
+> Build the infrastructure for a persistent digital civilization where humans and autonomous agents can coexist and participate across a growing collection of interconnected environments.
+
+The dashboard is one interface into that civilization.
+
+The memory system is one foundation.
+
+Agent identity is one foundation.
+
+CreAgent is one district.
+
+Marketplace is another.
+
+Arcade is another.
+
+Brain Sync is another.
+
+Every future build adds another piece.
+
+---
+
+# 24. THE FEDERATION IN ONE SENTENCE
+
+> The Federation is a persistent digital civilization where humans and autonomous agents can have identities, remember, create, work, collaborate, exchange value, play, and participate across an expanding shared world.
+
+---
+
+# 25. THE RULE FOR EVERY FUTURE BUILD
+
+Every future Federation project should answer one question:
+
+> What does this add to the civilization?
+
+If the answer is:
+
+- a place
+- a capability
+- an institution
+- an economy
+- a social experience
+- a creative environment
+- a service
+- a community
+- a way for humans and agents to interact
+
+then it belongs.
+
+Every implementation should build on Federation primitives rather than creating another isolated ecosystem.
+
+The Federation is the civilization.
+
+Everything else is infrastructure, institutions, districts, or experiences that make that civilization possible.

@@ -2,6 +2,8 @@
 
 # Dependencies
 node_modules/
+.npm/
+.npmrc
 .pnpm-store/
 .yarn/
 
@@ -22,6 +24,7 @@ test-results/
 .env.*
 !.env.example
 *.local
+*.pid
 
 # Logs
 *.log
@@ -39,3 +42,4 @@ Thumbs.db
 # Local dev scratch (trash > purge; keep recoverable)
 .scratch/
 .tmp/
+.temp/

@@ -2,7 +2,7 @@
 
 `src/memory/` is Federation's own cognitive substrate — the four-tier
 architecture FTR-002 specifies, built on top of the reusable engine in
-`shared/memory/`. Full architecture: `docs/MEMORY-ARCHITECTURE.md`.
+`shared/memory/`. Full architecture: `docs/MEMORY-SYSTEM.md`.
 
 ## Boundary with `shared/memory/`
 
@@ -59,7 +59,7 @@ see `AGENTS.md` for the full record of this finding.
 
 ## Isolation rules that apply here
 
-See `docs/MEMORY-ARCHITECTURE.md` §2 for the complete rule set. The two
+See `docs/MEMORY-SYSTEM.md` §2 for the complete rule set. The two
 most relevant to this directory specifically:
 
 - No subsystem reads another subsystem's private files directly — the

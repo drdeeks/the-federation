@@ -1,6 +1,7 @@
-# The Federation Adapter
+# The Federation Adapter (`@the-federation/adapter`)
 
-> A disposable translator between CharacterKit/ACK and Federation Watchtower.
+> A disposable translator between `@drdeeks/character-kit` and
+> `@federation-watchtower/sdk`.
 >
 > It owns no policy.
 
@@ -10,9 +11,9 @@ runtime bridge without either system depending on the other.
 
 | System | Owns | Adapter relationship |
 |---|---|---|
-| CharacterKit / ACK | habits, acknowledgements, commitments, command policy, fail-closed behavioral enforcement | upstream protocol client |
-| Federation Watchtower | canonical identity, lifecycle, events, leases, guardrails, audit, operator/MCP surfaces | downstream transport |
-| Federation adapter | translation and transport normalization only | disposable boundary |
+| `@drdeeks/character-kit` | habits, acknowledgements, commitments, command policy, fail-closed behavioral enforcement | upstream protocol client |
+| `@federation-watchtower/sdk` | canonical identity, lifecycle, events, leases, guardrails, audit, operator/MCP surfaces | downstream transport |
+| `@the-federation/adapter` | translation and transport normalization only | disposable boundary |
 
 ## Boundary
 
@@ -49,7 +50,7 @@ The bridge supports two Watchtower event paths:
 - legacy producer-signed `WatchtowerClient` requests as the compatibility
   path.
 
-The current sibling Watchtower branch has newer owner, agent lease, and
+The current Watchtower SDK package has owner, agent lease, and
 operator SDK surfaces. Those are consumed by Federation's integration and
 management layers, not added as adapter policy. The adapter only carries the
 event/lifecycle translation contract described above.
