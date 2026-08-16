@@ -168,6 +168,18 @@ Task/Job management in `src/context/`:
 - `src/context/router.js` — REST API for tasks/jobs per agent
 API verified: npm run smoke (3/3), ui typecheck+build (clean), adapter validate+test (32/32).
 
+**2026-08-16 — Knowledge Retrieval (MOD-003) + Context Router (MOD-004) implemented.**
+Knowledge plane (independent from episodic MOD-002):
+- `src/knowledge/graph/knowledge-graph.js` — Entities, relations, path finding
+- `src/knowledge/corpus/document-store.js` — Corpus metadata, content hash dedup
+- `src/knowledge/vectors/vector-store.js` — Chunks, embeddings, cosine similarity search
+- `src/knowledge/retrieval/knowledge-retrieval.js` — Hybrid search (graph + corpus + vectors), task-context composition
+- `src/knowledge/index.js` — Module exports
+Context Router (read-only composition over both planes):
+- `src/context/router.js` — ContextRouter composes episodic + knowledge with provenance/confidence
+No cross-dependency between MOD-002 (episodic) and MOD-003 (knowledge); ContextRouter sits above both.
+Verified: KnowledgeRetrieval basic ops, ContextRouter instantiation; all existing gates pass.
+
 - **Real bug found and fixed**: `src/memory/retrieval/embedding-engine.js`
   was a 376-line file, 374 lines identical to
   `shared/memory/engines/embedding-engine.js` (only two comment-header

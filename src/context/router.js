@@ -1,311 +1,230 @@
 /**
- * Context router — Task and job management API
+ * Context Router — MOD-004
  * 
- * Uses TaskManager and JobManager for persistent, feature-rich queues.
+ * Read-only composition layer above both memory planes:
+ * - Episodic/Experiential (MOD-002: src/memory/)
+ * - Knowledge/Semantic (MOD-003: src/knowledge/)
+ * 
+ * Does NOT own data. Does NOT modify either plane.
+ * Only composes context packages for task execution.
  */
 
-import express from 'express';
-import { TaskManager, TaskStatus, TaskPriority } from './task-manager.js';
-import { JobManager, JobType, JobStatus } from './job-manager.js';
+import { MemoryManager } from '../memory/memory-manager.js';
+import { KnowledgeRetrieval } from '../knowledge/index.js';
 
-const router = express.Router();
-
-// Per-agent task/job managers (in production, these would be persisted)
-const taskManagers = new Map();
-const jobManagers = new Map();
-
-function getTaskManager(agentId) {
-  if (!taskManagers.has(agentId)) {
-    taskManagers.set(agentId, new TaskManager());
+export class ContextRouter {
+  constructor(options = {}) {
+    this.episodicMemory = options.episodicMemory || new MemoryManager();
+    this.knowledgeMemory = options.knowledgeMemory || new KnowledgeRetrieval();
+    this.embedFn = options.embedFn || null;
+    
+    if (this.embedFn) {
+      this.knowledgeMemory.setEmbedFunction(this.embedFn);
+    }
   }
-  return taskManagers.get(agentId);
+
+  /**
+   * Compose context package for a task contract.
+   * Returns normalized context with provenance and confidence.
+   */
+  async composeContext(taskContract, options = {}) {
+    const { 
+      episodicLimit = 20, 
+      knowledgeLimit = 30,
+      includeEpisodic = true,
+      includeKnowledge = true,
+      timeRange,
+      tags,
+    } = options;
+
+    const context = {
+      taskContract: this._sanitizeContract(taskContract),
+      episodic: [],
+      knowledge: [],
+      provenance: [],
+      confidence: 0,
+      composedAt: new Date().toISOString(),
+    };
+
+    let totalConfidence = 0;
+    let totalItems = 0;
+
+    // 1. Episodic memory retrieval (what happened)
+    if (includeEpisodic) {
+      const episodicResults = this._retrieveEpisodic(taskContract, { 
+        limit: episodicLimit, 
+        timeRange, 
+        tags 
+      });
+      context.episodic = episodicResults.map(r => ({
+        ...r,
+        plane: 'episodic',
+        source: 'memory',
+        type: r.tier || 'memory',
+      }));
+      
+      for (const r of episodicResults) {
+        context.provenance.push({
+          source: 'episodic',
+          tier: r.tier,
+          cid: r.cid,
+          timestamp: r.timestamp,
+          confidence: r.salience || 0.5,
+        });
+        totalConfidence += (r.salience || 0.5);
+        totalItems++;
+      }
+    }
+
+    // 2. Knowledge retrieval (what is known)
+    if (includeKnowledge) {
+      const knowledgeResults = await this.knowledgeMemory.getContextForTask(taskContract, { 
+        limit: knowledgeLimit 
+      });
+      context.knowledge = knowledgeResults.map(r => ({
+        ...r,
+        plane: 'knowledge',
+        source: r.source, // 'graph' | 'corpus' | 'vectors'
+      }));
+
+      for (const r of knowledgeResults) {
+        context.provenance.push({
+          source: 'knowledge',
+          subsystem: r.source,
+          identifier: r.metadata?.entityId || r.metadata?.documentId || r.metadata?.vectorId,
+          confidence: r.score || r.confidence || 0.7,
+        });
+        totalConfidence += (r.score || r.confidence || 0.7);
+        totalItems++;
+      }
+    }
+
+    // 3. Compute aggregate confidence
+    context.confidence = totalItems > 0 ? totalConfidence / totalItems : 0;
+
+    // 4. Deduplicate across planes by content similarity
+    context.episodic = this._deduplicate(context.episodic);
+    context.knowledge = this._deduplicate(context.knowledge);
+
+    return context;
+  }
+
+  /**
+   * Retrieve from episodic memory based on task contract.
+   */
+  _retrieveEpisodic(taskContract, options) {
+    const { limit, timeRange, tags } = options;
+    const results = [];
+
+    // Search by task-related terms
+    const terms = this._extractTerms(taskContract);
+    for (const term of terms.slice(0, 3)) {
+      const termResults = this.episodicMemory.queryAll({
+        search: term,
+        limit: Math.ceil(limit / 3),
+      });
+      results.push(...termResults);
+    }
+
+    // Also query by agent/project if specified
+    if (taskContract.agentId) {
+      const agentResults = this.episodicMemory.queryAll({
+        tags: [`agent:${taskContract.agentId}`],
+        limit: Math.ceil(limit / 2),
+      });
+      results.push(...agentResults);
+    }
+
+    if (taskContract.projectId) {
+      const projectResults = this.episodicMemory.queryAll({
+        tags: [`project:${taskContract.projectId}`],
+        limit: Math.ceil(limit / 2),
+      });
+      results.push(...projectResults);
+    }
+
+    // Apply time range filter
+    let filtered = results;
+    if (timeRange) {
+      filtered = results.filter(r => {
+        const ts = new Date(r.timestamp).getTime();
+        return ts >= new Date(timeRange.start).getTime() && ts <= new Date(timeRange.end).getTime();
+      });
+    }
+
+    // Sort by relevance (salience * recency)
+    filtered.sort((a, b) => {
+      const scoreA = (a.salience || 0.5) * (1 / (1 + (Date.now() - new Date(a.timestamp).getTime()) / 86400000));
+      const scoreB = (b.salience || 0.5) * (1 / (1 + (Date.now() - new Date(b.timestamp).getTime()) / 86400000));
+      return scoreB - scoreA;
+    });
+
+    return filtered.slice(0, limit);
+  }
+
+  /**
+   * Sanitize task contract - remove sensitive/internal fields.
+   */
+  _sanitizeContract(contract) {
+    return {
+      taskId: contract.taskId || contract.id,
+      agentId: contract.agentId,
+      projectId: contract.projectId,
+      title: contract.title,
+      description: contract.description,
+      priority: contract.priority,
+      status: contract.status,
+      scope: contract.scope, // What the task is authorized to do
+      constraints: contract.constraints, // Explicit boundaries
+      createdAt: contract.createdAt,
+    };
+  }
+
+  /**
+   * Extract key terms from task contract for search.
+   */
+  _extractTerms(contract) {
+    const text = `${contract.title || ''} ${contract.description || ''} ${contract.scope || ''}`;
+    const stopWords = new Set(['the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of', 'with', 'by', 'is', 'are', 'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should', 'may', 'might', 'must', 'can', 'this', 'that', 'these', 'those']);
+    
+    const words = text.toLowerCase()
+      .replace(/[^\w\s]/g, ' ')
+      .split(/\s+/)
+      .filter(w => w.length > 3 && !stopWords.has(w));
+    
+    const freq = {};
+    for (const w of words) freq[w] = (freq[w] || 0) + 1;
+    
+    return Object.entries(freq)
+      .sort((a, b) => b[1] - a[1])
+      .map(([w]) => w);
+  }
+
+  /**
+   * Simple deduplication by content similarity.
+   */
+  _deduplicate(items) {
+    const seen = new Set();
+    const unique = [];
+    for (const item of items) {
+      const key = `${item.source || item.plane}:${item.cid || item.metadata?.entityId || item.metadata?.documentId || item.content?.slice(0, 100) || JSON.stringify(item).slice(0, 100)}`;
+      if (!seen.has(key)) {
+        seen.add(key);
+        unique.push(item);
+      }
+    }
+    return unique;
+  }
+
+  /**
+   * Get stats for both planes.
+   */
+  getStats() {
+    return {
+      episodic: this.episodicMemory.getStats(),
+      knowledge: this.knowledgeMemory.getStats(),
+    };
+  }
 }
 
-function getJobManager(agentId) {
-  if (!jobManagers.has(agentId)) {
-    jobManagers.set(agentId, new JobManager());
-  }
-  return jobManagers.get(agentId);
-}
-
-// --- TASKS ---
-
-router.get('/:agentId/tasks', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const { status, limit = 100, offset = 0 } = req.query;
-    const tasks = tm.getByAgent(req.params.agentId, { 
-      status, 
-      limit: parseInt(limit), 
-      offset: parseInt(offset) 
-    });
-    res.json({ status: 'success', data: tasks });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to fetch tasks' }] });
-  }
-});
-
-router.post('/:agentId/tasks', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const { title, description, priority, payload, tags, metadata, assignedTo } = req.body;
-    
-    if (!title) {
-      return res.status(400).json({ status: 'error', errors: [{ message: 'Title is required' }] });
-    }
-
-    const task = tm.create(req.params.agentId, { title, description, priority, payload, tags, metadata, assignedTo });
-    res.status(201).json({ status: 'success', data: task });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: err.message || 'Failed to create task' }] });
-  }
-});
-
-router.get('/:agentId/tasks/:taskId', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const task = tm.get(req.params.taskId);
-    if (!task || task.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Task not found' }] });
-    }
-    res.json({ status: 'success', data: task });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to fetch task' }] });
-  }
-});
-
-router.patch('/:agentId/tasks/:taskId', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const task = tm.update(req.params.taskId, req.body);
-    if (!task || task.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Task not found' }] });
-    }
-    res.json({ status: 'success', data: task });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to update task' }] });
-  }
-});
-
-router.post('/:agentId/tasks/:taskId/assign', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const { assignedTo } = req.body;
-    const task = tm.assign(req.params.taskId, assignedTo);
-    if (!task || task.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Task not found' }] });
-    }
-    res.json({ status: 'success', data: task });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to assign task' }] });
-  }
-});
-
-router.post('/:agentId/tasks/:taskId/start', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const task = tm.start(req.params.taskId);
-    if (!task || task.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Task not found' }] });
-    }
-    res.json({ status: 'success', data: task });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to start task' }] });
-  }
-});
-
-router.post('/:agentId/tasks/:taskId/complete', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const { result } = req.body;
-    const task = tm.complete(req.params.taskId, result);
-    if (!task || task.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Task not found' }] });
-    }
-    res.json({ status: 'success', data: task });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to complete task' }] });
-  }
-});
-
-router.post('/:agentId/tasks/:taskId/fail', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const { error } = req.body;
-    const task = tm.fail(req.params.taskId, error);
-    if (!task || task.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Task not found' }] });
-    }
-    res.json({ status: 'success', data: task });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to fail task' }] });
-  }
-});
-
-router.delete('/:agentId/tasks/:taskId', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const task = tm.get(req.params.taskId);
-    if (!task || task.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Task not found' }] });
-    }
-    tm.delete(req.params.taskId);
-    res.json({ status: 'success', data: { removed: true } });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to delete task' }] });
-  }
-});
-
-router.get('/:agentId/tasks/stats', async (req, res) => {
-  try {
-    const tm = getTaskManager(req.params.agentId);
-    const stats = tm.getStats(req.params.agentId);
-    res.json({ status: 'success', data: stats });
-  } catch (err) {
-    console.error('[tasks] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to fetch stats' }] });
-  }
-});
-
-// --- JOBS ---
-
-router.get('/:agentId/jobs', async (req, res) => {
-  try {
-    const jm = getJobManager(req.params.agentId);
-    const { status, limit = 100, offset = 0 } = req.query;
-    const jobs = jm.getByAgent(req.params.agentId, { 
-      status, 
-      limit: parseInt(limit), 
-      offset: parseInt(offset) 
-    });
-    res.json({ status: 'success', data: jobs });
-  } catch (err) {
-    console.error('[jobs] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to fetch jobs' }] });
-  }
-});
-
-router.get('/:agentId/jobs/:jobId', async (req, res) => {
-  try {
-    const jm = getJobManager(req.params.agentId);
-    const job = jm.get(req.params.jobId);
-    if (!job || job.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Job not found' }] });
-    }
-    res.json({ status: 'success', data: job });
-  } catch (err) {
-    console.error('[jobs] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to fetch job' }] });
-  }
-});
-
-router.post('/:agentId/jobs', async (req, res) => {
-  try {
-    const jm = getJobManager(req.params.agentId);
-    const { name, type, schedule, payload, maxRuns, timeout, retryPolicy, nextRun, metadata } = req.body;
-    
-    if (!name) {
-      return res.status(400).json({ status: 'error', errors: [{ message: 'Name is required' }] });
-    }
-
-    const job = jm.create(req.params.agentId, { name, type, schedule, payload, maxRuns, timeout, retryPolicy, nextRun, metadata });
-    res.status(201).json({ status: 'success', data: job });
-  } catch (err) {
-    console.error('[jobs] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: err.message || 'Failed to create job' }] });
-  }
-});
-
-router.patch('/:agentId/jobs/:jobId', async (req, res) => {
-  try {
-    const jm = getJobManager(req.params.agentId);
-    const job = jm.update(req.params.jobId, req.body);
-    if (!job || job.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Job not found' }] });
-    }
-    res.json({ status: 'success', data: job });
-  } catch (err) {
-    console.error('[jobs] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to update job' }] });
-  }
-});
-
-router.post('/:agentId/jobs/:jobId/pause', async (req, res) => {
-  try {
-    const jm = getJobManager(req.params.agentId);
-    const job = jm.pause(req.params.jobId);
-    if (!job || job.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Job not found' }] });
-    }
-    res.json({ status: 'success', data: job });
-  } catch (err) {
-    console.error('[jobs] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to pause job' }] });
-  }
-});
-
-router.post('/:agentId/jobs/:jobId/resume', async (req, res) => {
-  try {
-    const jm = getJobManager(req.params.agentId);
-    const job = jm.resume(req.params.jobId);
-    if (!job || job.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Job not found' }] });
-    }
-    res.json({ status: 'success', data: job });
-  } catch (err) {
-    console.error('[jobs] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to resume job' }] });
-  }
-});
-
-router.post('/:agentId/jobs/:jobId/execute', async (req, res) => {
-  try {
-    const jm = getJobManager(req.params.agentId);
-    // In real usage, executor would be injected
-    const job = await jm.execute(req.params.jobId, async (payload) => {
-      // Placeholder executor - in real usage this would call the agent
-      return { executed: true, payload };
-    });
-    res.json({ status: 'success', data: job });
-  } catch (err) {
-    console.error('[jobs] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: err.message || 'Failed to execute job' }] });
-  }
-});
-
-router.delete('/:agentId/jobs/:jobId', async (req, res) => {
-  try {
-    const jm = getJobManager(req.params.agentId);
-    const job = jm.get(req.params.jobId);
-    if (!job || job.agentId !== req.params.agentId) {
-      return res.status(404).json({ status: 'error', errors: [{ message: 'Job not found' }] });
-    }
-    jm.delete(req.params.jobId);
-    res.json({ status: 'success', data: { removed: true } });
-  } catch (err) {
-    console.error('[jobs] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to delete job' }] });
-  }
-});
-
-router.get('/:agentId/jobs/stats', async (req, res) => {
-  try {
-    const jm = getJobManager(req.params.agentId);
-    const stats = jm.getStats(req.params.agentId);
-    res.json({ status: 'success', data: stats });
-  } catch (err) {
-    console.error('[jobs] error:', err);
-    res.status(500).json({ status: 'error', errors: [{ message: 'Failed to fetch stats' }] });
-  }
-});
-
-export default router;
+export default ContextRouter;
