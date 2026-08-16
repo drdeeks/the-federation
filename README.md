@@ -6,19 +6,15 @@
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](ui/package.json)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](ui/package.json)
 [![Express](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)](package.json)
-[![Smoke tests](https://img.shields.io/badge/smoke%20tests-3%2F3%20passing-brightgreen)](tests/)
-[![Adapter tests](https://img.shields.io/badge/adapter%20tests-32%2F32%20passing-brightgreen)](adapter/tests/)
-[![Status](https://img.shields.io/badge/status-foundation%20layer-orange)](docs/BUILD_SCOPE.md)
-
 The parent platform and persistent digital civilization for humans and
 autonomous agents.
 
-This repository is the Federation foundation layer: the operator console that
-mirrors Federation Watchtower (agent registry, lifecycle, observability, webhooks,
-operator credentials, MCP leases) and controls CharacterKit per agent
-(habits, ACK, commitments, command policy, fail-closed enforcement). It provides
-local agent management with live terminal, memory, tasks, logs, jobs, steering,
-and kill controls — with local observability fallback when Watchtower is unreachable.
+This repository is the Federation foundation layer: the operator experience and
+control plane surrounding Federation Watchtower (agent registry, lifecycle,
+observability, webhooks, operator credentials, and MCP) and CharacterKit per
+agent (habits, ACKs, commitments, command policy, and fail-closed enforcement).
+It provides local agent management with terminal, memory, tasks, logs, jobs,
+steering, and intervention controls, with a local observability projection.
 
 ## Product hierarchy
 
@@ -73,7 +69,7 @@ The repository intentionally contains two memory systems:
   indexing, retrieval policy, migrations, and context assembly.
 
 The Federation subsystem consumes the shared engine. It is not an independent
-duplicate implementation. See `docs/MEMORY-ARCHITECTURE.md`.
+duplicate implementation. See `docs/MEMORY-SYSTEM.md`.
 
 ## Repository map
 
@@ -82,7 +78,7 @@ AGENTS.md                         repository operating rules
 docs/FEDERATION-CONCEPT.md       product and civilization source of truth
 docs/BUILD_SCOPE.md              current implementation scope
 docs/INTEGRATION_MAP.md          dependency and route inventory
-docs/MEMORY-ARCHITECTURE.md      two-system memory boundary
+docs/MEMORY-SYSTEM.md      two-system memory boundary
 docs/PROVENANCE.md               disclosure and attribution rules
 shared/memory/                    reusable memory engine
 shared/enforcement/              fail-closed enforcement adapter
@@ -104,5 +100,6 @@ cd adapter && npm run validate
 cd adapter && npm test
 ```
 
-Passing the local smoke test does not prove a live external integration or
-cloud deployment.
+Local verification covers repository behavior. Live Watchtower, CharacterKit,
+MCP, webhook, cloud, and deployment behavior requires the corresponding
+services and credentials.

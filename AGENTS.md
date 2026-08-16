@@ -58,6 +58,13 @@ surface. Do not leave duplicate “current” documents in multiple directories.
 The concept wins for intended direction. Code and tests win for current claims.
 The scope wins for current build sequencing. Submission prose follows evidence.
 
+Public-facing documentation is evergreen: `README.md` describes the product,
+requirements, setup, operation, and troubleshooting. It does not contain
+internal progress, deficiencies, worktree state, or task clauses. Current state
+belongs in this file, `docs/PROJECT-STATUS.md`, reviews, changelogs, and the
+future checklist. The fresh blueprint and checklist are being rebuilt and are
+not part of this documentation pass.
+
 ## Product identity
 
 **The Federation** is the whole. Future products use `Federation-<name>` and
@@ -80,7 +87,10 @@ Memory, retrieval, policy, habits, ACKs, commitments, local controls (steer, pau
 
 ### Adapter
 
-The adapter translates and normalizes CharacterKit enforcement activity → normalized Watchtower events, and Watchtower lease/guardrail/status results → adapter-visible state. It owns no independent identity, policy, memory, or source of truth. It is the only cross-system layer and is disposable.
+The adapter translates and normalizes CharacterKit enforcement activity into
+Watchtower events and may relay Watchtower results as adapter-visible facts. It
+owns no independent identity, policy, memory, lease decision, or source of
+truth. It is the only cross-system layer and is disposable.
 
 ## Non-negotiable invariants
 
@@ -129,7 +139,19 @@ model safety, and Federation-owned credential and webhook management
 remain incomplete. Keep product direction ambitious and implementation claims
 factual.
 
-**Federation branch `fix/rooms-agents-migrations` (HEAD `2b39c88`, 14 commits ahead of `origin/main`, unpushed) implements:** operator RBAC (`fw_operator_*`), per-org/per-agent webhooks (alerts only, signed HMAC), canonical bearer auth, rooms/agents migrations, lifecycle hardening, auto-lease at registration, MCP lease/validation/authorization/gate/ack tools. These are **Watchtower-owned integration points** the console consumes; they are not rebuilt here. The SDK (`packages/watchtower-sdk`) is unchanged on this branch; gaps include: no `FederationOperatorClient`, `FederationAgentClient` lacks `requestLease`/`validateLease`. Operator scopes are `operator:read`/`operator:write` only (no lease scope); leases require MCP org credential with `watchtower:lease` + `project:<id>:control`. Leases are optional/opt-in.
+**Current Watchtower integration snapshot:** the inspected sibling branch is
+`fix/rooms-agents-migrations`, observed at HEAD `4c13601`. Its current SDK
+includes `FederationOwnerClient`, `FederationAgentClient` lease methods, and
+`FederationOperatorClient`. These are Watchtower-owned integration points; they
+are consumed here and not rebuilt in Federation.
+
+The adapter is newly built and remains a pure translator: CharacterKit
+enforcement activity becomes normalized Watchtower events, and external
+results may become adapter-visible facts. It owns no policy, identity, memory,
+lease decision, operator management, or canonical record.
+
+The dated evidence and remaining implementation gaps are maintained in
+`docs/PROJECT-STATUS.md`.
 
 **2026-08-15 — PHASE-1 (Cognitive Memory Substrate) gated.** Produced
 `src/memory/README.md`, real (not placeholder) `tests/memory-isolation.test.mjs`,
@@ -194,7 +216,7 @@ Verified: KnowledgeRetrieval basic ops, ContextRouter instantiation; all existin
   `consolidation/forget-policy.js`) already used correctly.
   `tests/memory-isolation.test.mjs`'s first test is now a permanent
   regression guard against this exact class of drift.
-- **Confirmed, not newly discovered**: `docs/MEMORY-ARCHITECTURE.md` §11
+- **Confirmed, not newly discovered**: `docs/MEMORY-SYSTEM.md` §11
   already honestly listed episodic, declarative/long-term, knowledge-graph,
   Memory Router, and Context Composer as "not yet integrated." Verified
   directly against the filesystem — `src/memory/episodic/`,
@@ -224,4 +246,3 @@ cd adapter && npm test
 ```
 
 Passing prose or a smoke test is not proof of a live external integration.
-
