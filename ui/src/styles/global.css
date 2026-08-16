@@ -1,0 +1,110 @@
+:root {
+  --fg-primary: #e8e8e8;
+  --fg-secondary: #a0a0a0;
+  --fg-muted: #666;
+  --bg-primary: #0a0a0f;
+  --bg-secondary: #11111a;
+  --bg-tertiary: #1a1a24;
+  --bg-card: #14141f;
+  --border-primary: #2a2a3a;
+  --border-focus: #00d4aa;
+  --accent-primary: #00d4aa;
+  --accent-secondary: #00b8ff;
+  --accent-warning: #ffb800;
+  --accent-danger: #ff4444;
+  --accent-info: #00aaff;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-ui: 'Space Grotesk', sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-ui);
+  background: var(--bg-primary);
+  color: var(--fg-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code, pre, kbd, samp {
+  font-family: var(--font-mono);
+}
+
+a {
+  color: var(--accent-secondary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fg-muted);
+}
+
+::selection {
+  background: rgba(0, 212, 170, 0.3);
+  color: var(--fg-primary);
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-pulse { animation: pulse 2s infinite; }
+.animate-slide-in { animation: slideIn var(--transition-normal) forwards; }
+.animate-fade-in { animation: fadeIn var(--transition-normal) forwards; }

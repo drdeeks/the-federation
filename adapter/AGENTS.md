@@ -160,6 +160,7 @@ Each file's "must not contain" list is in the build blueprint. Honor it.
   same pass: `package.json`'s `test` script was missing `--import tsx`, so
   `npm test` failed outright on this Node version (22.23.2) — the previously
   recorded "12/12 pass" wasn't reproducible via the documented command.
+- 2026-08-16 — **Ordering defect fixed (HARDENING-SCOPE.md P0):** `Ordering.classify()` in `src/normalization/ordering.ts` corrected to refuse state advancement for both future sequences (sequence > last + 1) and stale sequences (sequence <= last). Added `tests/ordering.test.ts` with regression test covering the exact defect scenario: 1 → 5 (out_of_order, state stays 1) → 2 → 3 → 4 → 5 all accepted, final state 4. **Tests: 32/32 unit pass; `tsc --noEmit` clean.**
 - 2026-08-14 — **Phase 3 correction closed, partially:** `watchtower.ts` now
   wires `FederationAgentClient` (canonical `fw_agent_*`) for
   connect/heartbeat/events/disconnect, additive alongside the legacy

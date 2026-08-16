@@ -1,5 +1,5 @@
 {
-  "name": "@drdeeks/character-kit-watchtower-bridge",
+  "name": "@the-federation/adapter",
   "version": "0.1.0",
   "description": "Translator bridge between Character Kit (local enforcement) and Federation Watchtower (federation/observability). The bridge owns no policy; it normalizes enforcement activity into Watchtower events and Watchtower results into adapter-visible state.",
   "type": "module",

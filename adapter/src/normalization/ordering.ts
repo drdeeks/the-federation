@@ -29,10 +29,8 @@ export class Ordering {
       this.lastSeq.set(k, event.sequence);
       return "ok";
     }
-    // stale or ahead-of-expected: do NOT advance state.
-    if (event.sequence > last) {
-      this.lastSeq.set(k, event.sequence);
-    }
+    // stale (sequence <= last) OR ahead-of-expected (sequence > last + 1):
+    // do NOT advance state in either case.
     return "out_of_order";
   }
 }

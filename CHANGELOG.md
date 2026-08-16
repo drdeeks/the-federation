@@ -78,7 +78,71 @@ Rollback Ref: commit 3e5dcb5 (federation-society-hardening... this repo,
               blueprint.md itself untouched, no rollback needed there
 ```
 
-## CL-0002 — PHASE-1 gated: memory subsystem docs, real isolation tests, a duplicate found and fixed
+## CL-0004 — AgentDrawer component: per-agent management drawer with 5 tabs
+
+```
+Date        : 2026-08-16
+Contributor : Claude
+Modules     : [MOD-006]
+Section Tags: [[PHASE-2-v1]]
+Files Changed: [ui/src/components/AgentDrawer.tsx (new),
+              ui/src/components/Overlay.tsx (new),
+              ui/src/styles/components.css (extended),
+              ui/src/App.tsx (wired drawer),
+              ui/src/components/types.ts (pre-existing AgentDrawerProps)]
+Description : Implemented AgentDrawer (MOD-006 / FTR-005) — the main
+              per-agent management interface opened from fleet sidebar.
+              Five tabs: Terminal (interactive command input/output with
+              provenance styling), Memory (tier tabs for daily/weekly/
+              long-term/identity, placeholder for memory substrate
+              connection), Tasks (queue placeholder with create action),
+              Control (steering input, lifecycle Pause/Resume/Kill buttons
+              wired to control API contract, policy status noting
+              CharacterKit local fail-closed enforcement + Watchtower
+              opt-in leases/validation gates), Observability (immutable
+              action log, heartbeat/loop state, local fallback note).
+              Uses pre-existing CSS variables and .drawer/.drawer-tabs/
+              .drawer-content styles. Overlay component added for
+              click-outside-to-close. TypeScript clean, build passes.
+Tests Passing: npm run typecheck (clean), npm run build (clean),
+               npm run smoke (3 pass)
+Phase       : PHASE-2
+Rollback Ref: git revert HEAD
+```
+
+---
+
+## CL-0003 — Phase I doc corrections: ownership boundaries, no project-labeled dirs, Federation branch integration target
+
+```
+Date        : 2026-08-15
+Contributor : Claude (federation-architect role)
+Modules     : [MOD-001, MOD-005, MOD-008, MOD-009, MOD-010]
+Section Tags: [[PHASE-I-v1]]
+Files Changed: [blueprint.md, README.md, AGENTS.md, CHANGELOG.md]
+Description : Corrected ownership boundaries across all three docs to reflect
+              reality: Federation Watchtower owns agent identity, registration,
+              lifecycle, credentials (fw_owner_*/fw_agent_*/fw_operator_*),
+              heartbeat/watchdog, webhooks (alerts only, signed HMAC), operator
+              credentials, leases, validation gates, controlled-tool authorization,
+              incident ledger. CharacterKit owns behavioral enforcement (habits,
+              ACK, commitments, command policy, fail-closed gating). This
+              repository owns local console: memory, tasks, logs, jobs, terminal,
+              steer/kill, local observability projection + Watchtower mirror with
+              local fallback. Added explicit "no project-labeled directories under
+              src/" rule (src/federation/ forbidden). Added Federation branch
+              integration target note (fix/rooms-agents-migrations, 14 commits
+              ahead, unpushed). Updated blueprint paths (src/federation/ ->
+              functional dirs). Updated FTR-001 (Watchtower mirror), FTR-005
+              (memory/task/log/job management), FTR-006 (CharacterKit control),
+              FTR-007 (local fallback observability), FTR-008 (consumption not
+              building), API contract (local endpoints + local observability).
+              Updated AGENTS.md with branch capabilities and SDK gaps.
+Tests Passing: npm run smoke (3 pass / 5 skip), cd adapter && npm run validate
+               (tsc clean), cd adapter && npm test (27/27 pass)
+Phase       : PHASE-I
+Rollback Ref: git revert HEAD
+```
 
 ```
 Date        : 2026-08-15 09:05 UTC
