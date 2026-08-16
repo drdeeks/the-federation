@@ -16,6 +16,11 @@
 
 ## Entries
 
+- 2026-08-16 — Corrected adapter documentation to reflect the current
+  Watchtower SDK branch and the adapter's strict translator-only boundary;
+  lease, operator, MCP, and policy responsibilities are documented as
+  Federation/Watchtower integration concerns, not adapter behavior.
+
 - 2026-08-16 — Fixed ordering defect (HARDENING-SCOPE.md P0): `Ordering.classify()` now correctly refuses to advance state for future sequences (sequence > last + 1) and stale sequences (sequence <= last). Added `tests/ordering.test.ts` with regression test verifying: sequence 1 → sequence 5 (out_of_order, state remains 1) → sequence 2 → 3 → 4 → 5 all accepted, final state 4. 32/32 unit tests pass, `tsc --noEmit` clean.
 - 2026-08-14 — MOD-004 (canonical client wiring), closing the gap
   `FEDERATION_ROUTE_MAP.md` documented: `watchtower.ts` now constructs a

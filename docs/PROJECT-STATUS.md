@@ -45,17 +45,16 @@ Verified in the current adapter:
 
 Next adapter work:
 
-- wire canonical lease request and validation;
-- decide and wire validation gates, controlled actions, command polling, and
-  command acknowledgement;
-- use owner bootstrap instead of leaving `WATCHTOWER_OWNER_TOKEN` unused;
-- represent operator/MCP access through explicit Federation integration ports;
-- replace in-memory retry state with durable recoverable delivery when needed;
-- populate adapter-visible lease and guardrail state;
+- keep the adapter documentation and contracts synchronized with the
+  translator-only boundary;
+- keep canonical Watchtower control, operator, MCP, and onboarding access in
+  Federation integration layers rather than adding policy to the adapter;
+- replace in-memory retry state with durable recoverable delivery only if the
+  bridge contract requires it;
 - add live integration evidence against running Watchtower and CharacterKit.
 
-The adapter route map needs revision because its older text predates the
-current SDK lease and operator additions.
+The adapter route map has now been revised to distinguish adapter-wired event
+and lifecycle translation from Watchtower/Federation-owned control surfaces.
 
 ## Federation evidence
 
