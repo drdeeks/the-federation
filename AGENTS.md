@@ -5,7 +5,7 @@ platform and persistent digital civilization for humans and autonomous agents.
 
 ## Repository boundary
 
-Work only inside `/home/drdeek/projects/hackathon` for this project.
+Work only inside `/home/drdeek/projects/the-federation/federation` for this project.
 
 - Do not inspect, edit, commit, push, deploy, or configure sibling projects
   unless the owner explicitly authorizes that separate operation.
@@ -36,7 +36,7 @@ Documentation placement:
 
 - `docs/` — Federation concept, current scope, integration facts, rules,
   submission material, and repository-wide design records.
-- `adapter/` — adapter code, tests, docs, changelog, and adapter-local rules.
+- `@the-federation/watchtower-adapter` (repo `federation-adapters`) — adapter code, tests, docs, changelog, and adapter-local rules.
 - `layers/<function>/` — implementation notes and code for that subsystem.
 - `shared/<capability>/` — reusable capability code and its local README/tests.
 - `.trash/` — recoverable legacy or redundant material; never use it as an
@@ -86,7 +86,7 @@ Memory, retrieval, policy, habits, ACKs, commitments, local controls (steer, pau
 - **`@drdeeks/character-kit`** owns behavioral configuration and fail-closed enforcement (habits, ACK, commitments, command policy). It does not own Federation identity, memory, organizations, or UI.
 - **Google ADK/Gemini and cloud services** are implementation components for the current foundation slice, not the product definition.
 
-### `@the-federation/adapter`
+### `@the-federation/watchtower-adapter`
 
 The adapter translates and normalizes `@drdeeks/character-kit` enforcement activity into
 Watchtower events and may relay Watchtower results as adapter-visible facts. It
@@ -238,13 +238,14 @@ Verified: KnowledgeRetrieval basic ops, ContextRouter instantiation; all existin
 
 ## Verification
 
-Run commands only inside this repository or `adapter/`:
+Run commands only inside this repository (the adapter lives in the separate `federation-adapters` repo):
 
 ```bash
 npm run smoke
 npm run validate
-cd adapter && npm run validate
-cd adapter && npm test
+# Adapter verification runs in its own repo `federation-adapters`:
+#   npm run validate
+#   npm test
 ```
 
 Passing prose or a smoke test is not proof of a live external integration.

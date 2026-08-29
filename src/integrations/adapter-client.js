@@ -17,7 +17,7 @@ class AdapterClient {
     if (!this.fixtureMode) {
       try {
         // Dynamic import of compiled adapter
-        const adapterModule = await import('../../../adapter/dist/index.js');
+        const adapterModule = await import('@the-federation/watchtower-adapter');
         this.adapter = adapterModule.createAdapter({
           characterKit: { socketPath: this.ckSocketPath },
           watchtower: { url: this.watchtowerUrl },

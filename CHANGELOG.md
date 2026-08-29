@@ -281,3 +281,9 @@ Rollback Ref: revert via git revert on this entry's commit; the
               the test or README changes
 ```
 
+
+## 2026-08-28 — Documentation de-drift + adapter wiring hardening
+- De-drifted all references from the old package name `@the-federation/adapter` (and the local `federation/adapter` copy) to the canonical `@the-federation/watchtower-adapter` (repo `federation-adapters`) in `blueprint.md`, `docs/INTEGRATION_MAP.md`, `docs/PROJECT-STATUS.md`, and `src/integrations/adapter-client.js`.
+- Repointed `adapter-client.js` dynamic import from `../../../adapter/dist/index.js` to the published package `@the-federation/watchtower-adapter`; added it as a dependency in `package.json`.
+- Trashed the stale local `federation/adapter/` (a checked-in copy named `@the-federation/adapter`) to `federation/.trash/adapter` — superseded by the canonical package.
+- Pre-edit versions of changed files archived under `docs/outdated-labeling/`.

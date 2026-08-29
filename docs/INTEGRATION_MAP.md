@@ -48,7 +48,7 @@ memory, management, and presentation experience.
 
 ## Adapter boundary
 
-`@the-federation/adapter` is newly built and disposable. It is a translator, not a policy
+`@the-federation/watchtower-adapter` is newly built and disposable. It is a translator, not a policy
 engine:
 
 ```text

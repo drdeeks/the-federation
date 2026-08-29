@@ -13,6 +13,8 @@ build/
 *.log
 *.pid
 .trash/
+.monitor-state.json
+state/validation/
 deadweight/
 coverage/
 .cache/
@@ -24,3 +26,6 @@ coverage/
 *.swo
 *.tar.gz
 .DS_Store
+
+# archived pre-edit versions (intentionally untracked)
+docs/outdated-labeling/

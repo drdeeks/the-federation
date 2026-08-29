@@ -21,7 +21,8 @@
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "ws": "^8.17.0"
+    "ws": "^8.17.0",
+    "@the-federation/watchtower-adapter": "^0.1.0"
   },
   "devDependencies": {
     "concurrently": "^8.2.2",

@@ -13,7 +13,7 @@ This repository is the Federation foundation layer: the operator experience and
 control plane surrounding `@federation-watchtower/sdk` (agent registry,
 lifecycle, observability, webhooks, operator credentials, and MCP) and
 `@drdeeks/character-kit` per agent (habits, ACKs, commitments, command policy,
-and fail-closed enforcement). It includes `@the-federation/adapter` as the
+and fail-closed enforcement). It includes `@the-federation/watchtower-adapter` as the
 translator boundary and provides local agent management with terminal, memory,
 tasks, logs, jobs, steering, and intervention controls.
 
@@ -83,22 +83,23 @@ docs/MEMORY-SYSTEM.md      two-system memory boundary
 docs/PROVENANCE.md               disclosure and attribution rules
 shared/memory/                    reusable memory engine
 shared/enforcement/              fail-closed enforcement adapter
-adapter/                          interoperability bridge (CharacterKit ⇄ Watchtower)
+@the-federation/watchtower-adapter (repo `federation-adapters`)    interoperability bridge (CharacterKit ⇄ Watchtower)
 layers/                           foundation subsystem boundaries
 src/server/                       Express + ws server (console API + live terminal)
 src/observability/                Watchtower mirror + local fallback observability
 src/control/                      CharacterKit control orchestration
 src/memory/                       Federation application memory subsystem (four tiers)
 src/context/                      task management
-src/integrations/adapter-client.js  thin wrapper over adapter/dist public API
+src/integrations/adapter-client.js  thin wrapper over the `@the-federation/watchtower-adapter` public API
 ```
 
 ## Verification
 
 ```bash
 npm run smoke
-cd adapter && npm run validate
-cd adapter && npm test
+# Adapter verification runs in its own repo `federation-adapters`:
+#   npm run validate
+#   npm test
 ```
 
 Local verification covers repository behavior. Live Watchtower, CharacterKit,

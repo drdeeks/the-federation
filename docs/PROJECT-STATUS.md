@@ -12,7 +12,7 @@ created later.
 |---|---|---|
 | `@federation-watchtower/sdk` / Federation Watchtower | pre-existing | identity, registration, lifecycle, credentials, heartbeats, rooms, events, leases, guardrails, audit, MCP, signed webhooks |
 | `@drdeeks/character-kit` | pre-existing | habits, ACKs, commitments, command policy, fail-closed enforcement |
-| `@the-federation/adapter` | newly built | translation, normalization, ordering, retry, fail-closed delivery boundary |
+| `@the-federation/watchtower-adapter` | newly built | translation, normalization, ordering, retry, fail-closed delivery boundary |
 | Federation foundation | newly built/building | memory, context, control, task/job management, UI, native projection, provider ports |
 
 ## Watchtower branch and SDK
