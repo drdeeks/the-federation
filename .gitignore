@@ -26,6 +26,9 @@ coverage/
 *.swo
 *.tar.gz
 .DS_Store
+__pycache__/
+*.pyc
+*.pyo
 
 # archived pre-edit versions (intentionally untracked)
 docs/outdated-labeling/
