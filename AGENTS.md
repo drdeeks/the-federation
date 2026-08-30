@@ -5,7 +5,7 @@ platform and persistent digital civilization for humans and autonomous agents.
 
 ## Repository boundary
 
-Work only inside `/home/drdeek/projects/the-federation/federation` for this project.
+Work only inside `/home/drdeek/projects/Federation-Society/federation` for this project.
 
 - Do not inspect, edit, commit, push, deploy, or configure sibling projects
   unless the owner explicitly authorizes that separate operation.
@@ -36,7 +36,7 @@ Documentation placement:
 
 - `docs/` — Federation concept, current scope, integration facts, rules,
   submission material, and repository-wide design records.
-- `@the-federation/watchtower-adapter` (repo `federation-adapters`) — adapter code, tests, docs, changelog, and adapter-local rules.
+- `@the-federation/watchtower-adapter` (repo `drdeeks/watchtower-adapter`, subtree `plugins/watchtower-adapter`) — adapter code, tests, docs, changelog, and adapter-local rules.
 - `layers/<function>/` — implementation notes and code for that subsystem.
 - `shared/<capability>/` — reusable capability code and its local README/tests.
 - `.trash/` — recoverable legacy or redundant material; never use it as an
@@ -238,12 +238,12 @@ Verified: KnowledgeRetrieval basic ops, ContextRouter instantiation; all existin
 
 ## Verification
 
-Run commands only inside this repository (the adapter lives in the separate `federation-adapters` repo):
+Run commands only inside this repository (the adapter lives in the separate `plugins/watchtower-adapter` submodule, repo `drdeeks/watchtower-adapter`):
 
 ```bash
 npm run smoke
 npm run validate
-# Adapter verification runs in its own repo `federation-adapters`:
+# Adapter verification runs in its own repo `drdeeks/watchtower-adapter`:
 #   npm run validate
 #   npm test
 ```

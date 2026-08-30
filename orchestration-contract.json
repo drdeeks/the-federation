@@ -1,0 +1,43 @@
+{
+  "contract_version": "1",
+  "project": {
+    "id": "The Federation",
+    "root": "."
+  },
+  "state": {
+    "chain": ".chain/checklist-The-Federation.json",
+    "tasks": "checklist-data.json"
+  },
+  "adapters": {
+    "task_store": {
+      "kind": "required"
+    },
+    "gate": {
+      "kind": "required"
+    },
+    "executor": {
+      "kind": "required"
+    },
+    "verifier": {
+      "kind": "required"
+    },
+    "health": {
+      "kind": "required"
+    },
+    "audit": {
+      "kind": "required"
+    }
+  },
+  "policies": {
+    "poll_interval_seconds": 15,
+    "max_retries": 3,
+    "fail_closed": true,
+    "repair_mode": "propose"
+  },
+  "completion_requirements": [
+    "contract_valid",
+    "all_deliverables_verified",
+    "no_unresolved_blockers",
+    "audit_record_written"
+  ]
+}

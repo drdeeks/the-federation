@@ -1,103 +1,12 @@
 {
-  "assignments": {
-    "PHASE-0": {
-      "agent": "federation-architect",
-      "scope": "PHASE-0",
-      "label": "Phase 0",
-      "status": "not_started",
-      "assigned_at": "2026-08-14T19:01:33.306670+00:00",
-      "completed_at": null,
-      "notes": ""
-    },
-    "PHASE-1": {
-      "agent": "federation-memory",
-      "scope": "PHASE-1",
-      "label": "Phase 1",
-      "status": "not_started",
-      "assigned_at": "2026-08-14T19:01:36.792320+00:00",
-      "completed_at": null,
-      "notes": ""
-    },
-    "PHASE-2": {
-      "agent": "federation-frontend",
-      "scope": "PHASE-2",
-      "label": "Phase 2",
-      "status": "not_started",
-      "assigned_at": "2026-08-14T19:01:40.770985+00:00",
-      "completed_at": null,
-      "notes": ""
-    },
-    "PHASE-3": {
-      "agent": "federation-runtime",
-      "scope": "PHASE-3",
-      "label": "Phase 3",
-      "status": "not_started",
-      "assigned_at": "2026-08-14T19:01:46.794451+00:00",
-      "completed_at": null,
-      "notes": ""
-    },
-    "PHASE-4": {
-      "agent": "federation-adapter",
-      "scope": "PHASE-4",
-      "label": "Phase 4",
-      "status": "not_started",
-      "assigned_at": "2026-08-14T19:01:50.726921+00:00",
-      "completed_at": null,
-      "notes": ""
-    },
-    "PHASE-5": {
-      "agent": "federation-qa",
-      "scope": "PHASE-5",
-      "label": "Phase 5",
-      "status": "not_started",
-      "assigned_at": "2026-08-14T19:01:54.171189+00:00",
-      "completed_at": null,
-      "notes": ""
-    }
-  },
-  "history": [
-    {
-      "event": "assigned",
-      "scope": "PHASE-0",
-      "agent": "federation-architect",
-      "prior_agent": "unassigned",
-      "timestamp": "2026-08-14T19:01:33.306691+00:00"
-    },
-    {
-      "event": "assigned",
-      "scope": "PHASE-1",
-      "agent": "federation-memory",
-      "prior_agent": "unassigned",
-      "timestamp": "2026-08-14T19:01:36.792374+00:00"
-    },
-    {
-      "event": "assigned",
-      "scope": "PHASE-2",
-      "agent": "federation-frontend",
-      "prior_agent": "unassigned",
-      "timestamp": "2026-08-14T19:01:40.771074+00:00"
-    },
-    {
-      "event": "assigned",
-      "scope": "PHASE-3",
-      "agent": "federation-runtime",
-      "prior_agent": "unassigned",
-      "timestamp": "2026-08-14T19:01:46.794503+00:00"
-    },
-    {
-      "event": "assigned",
-      "scope": "PHASE-4",
-      "agent": "federation-adapter",
-      "prior_agent": "unassigned",
-      "timestamp": "2026-08-14T19:01:50.726974+00:00"
-    },
-    {
-      "event": "assigned",
-      "scope": "PHASE-5",
-      "agent": "federation-qa",
-      "prior_agent": "unassigned",
-      "timestamp": "2026-08-14T19:01:54.171244+00:00"
-    }
-  ],
-  "created_at": "2026-08-14T19:01:33.306368+00:00"
+  "project": "The Federation",
+  "version": "1.0",
+  "assignments": [
+    {"scope": "PHASE-0", "assigned_agent": "federation-architect", "reviewer_agent": "federation-qa", "status": "not_started"},
+    {"scope": "PHASE-1", "assigned_agent": "memory-architect", "reviewer_agent": "memory-reviewer", "status": "not_started"},
+    {"scope": "PHASE-2", "assigned_agent": "context-architect", "reviewer_agent": "context-reviewer", "status": "not_started"},
+    {"scope": "PHASE-3", "assigned_agent": "control-architect", "reviewer_agent": "control-reviewer", "status": "not_started"},
+    {"scope": "PHASE-4", "assigned_agent": "integration-architect", "reviewer_agent": "integration-reviewer", "status": "not_started"},
+    {"scope": "PHASE-5", "assigned_agent": "release-architect", "reviewer_agent": "release-reviewer", "status": "not_started"}
+  ]
 }

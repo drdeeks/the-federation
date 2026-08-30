@@ -83,7 +83,7 @@ docs/MEMORY-SYSTEM.md      two-system memory boundary
 docs/PROVENANCE.md               disclosure and attribution rules
 shared/memory/                    reusable memory engine
 shared/enforcement/              fail-closed enforcement adapter
-@the-federation/watchtower-adapter (repo `federation-adapters`)    interoperability bridge (CharacterKit ⇄ Watchtower)
+@the-federation/watchtower-adapter (repo `drdeeks/watchtower-adapter`)    interoperability bridge (CharacterKit ⇄ Watchtower)
 layers/                           foundation subsystem boundaries
 src/server/                       Express + ws server (console API + live terminal)
 src/observability/                Watchtower mirror + local fallback observability
@@ -97,7 +97,7 @@ src/integrations/adapter-client.js  thin wrapper over the `@the-federation/watch
 
 ```bash
 npm run smoke
-# Adapter verification runs in its own repo `federation-adapters`:
+# Adapter verification runs in its own repo `drdeeks/watchtower-adapter`:
 #   npm run validate
 #   npm test
 ```

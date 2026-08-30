@@ -1,0 +1,437 @@
+{
+  "name": "checklist-The-Federation",
+  "project": "/home/drdeek/projects/hackathon",
+  "created_at": "2026-08-16T19:13:12Z",
+  "steps": [
+    {
+      "index": 0,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-00-Foundation",
+      "state": "active",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 1,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-00-step-01-PHASE-0.1-Type-file-`docs-BUILD_SCOPE.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 2,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-00-step-02-PHASE-0.2-Type-file-`docs-INTEGRATION_MAP.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 3,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-00-step-03-PHASE-0.3-Type-file-`docs-PROVENANCE.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 4,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-00-step-04-PHASE-0.4-Type-file-`package.json`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 5,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-00-step-05-PHASE-0.5-Type-review-`review-phase0.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 6,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-00-step-06-PHASE-0-V-Validation-gate",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 7,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-01-Independent-Memory-Planes",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 8,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-01-step-01-PHASE-1.1-Type-file-`src-memory-memory-manager.js",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 9,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-01-step-02-PHASE-1.2-Type-file-`shared-memory-store-memory-s",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 10,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-01-step-03-PHASE-1.3-Type-file-`tests-memory-isolation.test.",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 11,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-01-step-04-PHASE-1.4-Type-file-`docs-MEMORY-SYSTEM.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 12,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-01-step-05-PHASE-1.5-Type-review-`review-phase1.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 13,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-01-step-06-PHASE-1-V-Validation-gate",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 14,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-02-Knowledge-Context-and-Delegati",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 15,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-02-step-01-PHASE-2.1-Type-file-`src-knowledge-index.js`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 16,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-02-step-02-PHASE-2.2-Type-file-`src-knowledge-retrieval-know",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 17,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-02-step-03-PHASE-2.3-Type-file-`src-context-router.js`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 18,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-02-step-04-PHASE-2.4-Type-file-`src-context-task-manager.js`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 19,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-02-step-05-PHASE-2.5-Type-review-`review-phase2.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 20,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-02-step-06-PHASE-2-V-Validation-gate",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 21,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-03-Control-and-Native-Visibility",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 22,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-03-step-01-PHASE-3.1-Type-file-`src-context-job-manager.js`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 23,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-03-step-02-PHASE-3.2-Type-file-`src-server-routers-control.j",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 24,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-03-step-03-PHASE-3.3-Type-file-`ui-src-components-AgentDrawe",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 25,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-03-step-04-PHASE-3.4-Type-file-`src-observability-provider.j",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 26,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-03-step-05-PHASE-3.5-Type-review-`review-phase3.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 27,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-03-step-06-PHASE-3-V-Validation-gate",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 28,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-04-Translator-and-Provider-Integr",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 29,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-04-step-01-PHASE-4.1-Type-file-`src-integrations-adapter-cli",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 30,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-04-step-02-PHASE-4.2-Type-file-`adapter-src-contracts.ts`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 31,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-04-step-03-PHASE-4.3-Type-file-`adapter-src-bridge-character",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 32,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-04-step-04-PHASE-4.4-Type-file-`adapter-src-bridge-watchtowe",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 33,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-04-step-05-PHASE-4.5-Type-review-`review-phase4.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 34,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-04-step-06-PHASE-4-V-Validation-gate",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 35,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-05-Evidence-and-Operations",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 36,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-05-step-01-PHASE-5.1-Type-file-`README.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 37,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-05-step-02-PHASE-5.2-Type-file-`docs-SUBMISSION-GUARDRAILS.m",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 38,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-05-step-03-PHASE-5.3-Type-file-`docs-PROVENANCE.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 39,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-05-step-04-PHASE-5.4-Type-file-`tests-memory-isolation.test.",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 40,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-05-step-05-PHASE-5.5-Type-review-`review-phase5.md`",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 41,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/phase-05-step-06-PHASE-5-V-Validation-gate",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    },
+    {
+      "index": 42,
+      "path": "/home/drdeek/projects/hackathon/.blueprint-chain/completion-assurance",
+      "state": "locked",
+      "validator": null,
+      "created_at": "2026-08-16T19:13:12Z",
+      "verified_at": null,
+      "completed_at": null,
+      "attempts": 0
+    }
+  ]
+}
