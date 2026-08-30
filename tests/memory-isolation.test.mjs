@@ -58,7 +58,7 @@ test('src/memory adapter modules re-export shared/memory engines rather than dup
     // The definitive check: it must actually re-export from shared/memory/.
     assert.match(
       source,
-      /export \* from ['"]\.\.\/\.\.\/\.\.\/shared\/memory\//,
+      /export \* from ['"]\.\.\/\.\.\/shared\/memory\//,
       `${relPath} does not re-export from shared/memory/ -- it may be a disconnected duplicate`,
     );
     // Backstop: a real duplicate (like the 376-line embedding-engine.js this
@@ -78,7 +78,7 @@ test('src/memory adapter modules re-export shared/memory engines rather than dup
 });
 
 test('shared/memory engine source never imports back into src/ (the engine must not depend on its application)', async () => {
-  const sharedMemoryDir = join(REPO_ROOT, 'shared', 'memory');
+  const sharedMemoryDir = join(REPO_ROOT, 'src', 'shared', 'memory');
   const offenders = [];
 
   function walk(dir) {

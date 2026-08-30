@@ -6,7 +6,7 @@
  * Core agent identity, values, constitutional commitments.
  */
 
-import { MemoryStore } from '../../../shared/memory/store/memory-store.js';
+import { MemoryStore } from '../../shared/memory/store/memory-store.js';
 
 const MAX_SIZE = 1000; // Small, curated set
 

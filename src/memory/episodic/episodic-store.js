@@ -6,7 +6,7 @@
  * Promoted from working; decays unless promoted to persistent.
  */
 
-import { MemoryStore } from '../../../shared/memory/store/memory-store.js';
+import { MemoryStore } from '../../shared/memory/store/memory-store.js';
 
 const DEFAULT_TTL_HOURS = 168; // 7 days
 const MAX_SIZE = 5000;

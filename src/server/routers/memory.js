@@ -2,7 +2,7 @@
  * Memory router — tiered memory management (local shared/memory engine)
  */
 import express from 'express';
-import { MemoryStore } from '../../../shared/memory/store/memory-store.js';
+import { MemoryStore } from '../../shared/memory/store/memory-store.js';
 
 const router = express.Router();
 

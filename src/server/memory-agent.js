@@ -8,7 +8,7 @@
  * - Learning
  * - Tier routing (Working, Episodic, Semantic, Identity)
  */
-import { MemoryStore, EmbeddingEngine, RecallEngine, ForgetEngine, LearningEngine, IngestionEngine } from '../../shared/memory/index.js';
+import { MemoryStore, EmbeddingEngine, RecallEngine, ForgetEngine, LearningEngine, IngestionEngine } from '../../src/shared/memory/index.js';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 

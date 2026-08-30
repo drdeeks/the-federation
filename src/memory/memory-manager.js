@@ -5,10 +5,10 @@
  * Handles promotion, cross-tier queries, and tier-specific policies.
  */
 
-import { WorkingStore } from '../working/working-store.js';
-import { EpisodicStore } from '../episodic/episodic-store.js';
-import { PersistentStore } from '../persistent/persistent-store.js';
-import { IdentityContextStore } from '../schemas/identity-context-store.js';
+import { WorkingStore } from './working/working-store.js';
+import { EpisodicStore } from './episodic/episodic-store.js';
+import { PersistentStore } from './persistent/persistent-store.js';
+import { IdentityContextStore } from './schemas/identity-context-store.js';
 
 export class MemoryManager {
   constructor(options = {}) {

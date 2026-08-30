@@ -19,15 +19,15 @@ import { createApiRouter } from '../../layers/gateway/router.js';
 import { corsMiddleware } from '../../layers/gateway/cors.js';
 import { rateLimiter } from '../../layers/gateway/rate-limit.js';
 import { apiKeyAuth } from '../../layers/gateway/auth.js';
-import { requestLogger } from '../../layers/observability/logger.js';
+import { logger } from '../../layers/observability/logger.js';
 
-import { fleetRouter } from './routers/fleet.js';
-import { agentsRouter } from './routers/agents.js';
-import { memoryRouter } from './routers/memory.js';
-import { controlRouter } from './routers/control.js';
-import { observabilityRouter } from './routers/observability.js';
-import { terminalRouter } from './routers/terminal.js';
-import { contextRouter } from '../context/router.js';
+import fleetRouter, { setRegistry as setFleetRegistry } from './routers/fleet.js';
+import agentsRouter, { setRegistry as setAgentsRegistry } from './routers/agents.js';
+import memoryRouter, { setMemoryStore } from './routers/memory.js';
+import controlRouter, { setAdapterClient } from './routers/control.js';
+import observabilityRouter, { setProvider } from './routers/observability.js';
+import { handleConnection } from './routers/terminal.js';
+import contextRouter from '../context/router.js';
 import { observabilityProvider } from '../observability/provider.js';
 import { adapterClient } from '../integrations/adapter-client.js';
 import { MemoryAgent } from './memory-agent.js';
@@ -52,7 +52,14 @@ let isShuttingDown = false;
 // --- Global middleware ---
 app.use(express.json({ limit: '1mb' }));
 app.use(corsMiddleware());
-app.use(requestLogger);
+app.use((req, res, next) => {
+  const start = Date.now();
+  res.on('finish', () => {
+    const duration = Date.now() - start;
+    logger.info({ method: req.method, url: req.url, status: res.statusCode, duration }, 'request');
+  });
+  next();
+});
 app.use(rateLimiter);
 app.use(apiKeyAuth);
 
@@ -106,11 +113,11 @@ const agentRegistry = new AgentRegistry({
 
 await agentRegistry.initialize();
 
-fleetRouter.setRegistry(agentRegistry);
-agentsRouter.setRegistry(agentRegistry);
-memoryRouter.setMemoryStore(memoryAgent.store);
-controlRouter.setAdapterClient(adapterClient);
-observabilityRouter.setProvider(observabilityProvider);
+setFleetRegistry(agentRegistry);
+setAgentsRegistry(agentRegistry);
+setMemoryStore(memoryAgent.store);
+setAdapterClient(adapterClient);
+setProvider(observabilityProvider);
 
 // Initialize observability with local fallback
 observabilityProvider.setWatchtowerClient(null); // Will be set when Watchtower creds available
@@ -129,7 +136,7 @@ app.use('/api/federation/observability', observabilityRouter);
 
 // --- WebSocket: live terminal ---
 wss.on('connection', (ws, req) => {
-  terminalRouter.handleConnection(ws, req);
+  handleConnection(ws, req);
 });
 
 // --- Serve UI in production ---

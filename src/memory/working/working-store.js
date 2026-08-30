@@ -6,7 +6,7 @@
  * Automatically expires unless promoted.
  */
 
-import { MemoryStore } from '../../../shared/memory/store/memory-store.js';
+import { MemoryStore } from '../../shared/memory/store/memory-store.js';
 
 const DEFAULT_TTL_HOURS = 36; // 1.5 days
 const MAX_SIZE = 2000;

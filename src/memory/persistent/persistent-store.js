@@ -6,7 +6,7 @@
  * Requires explicit promotion; audit trail maintained.
  */
 
-import { MemoryStore } from '../../../shared/memory/store/memory-store.js';
+import { MemoryStore } from '../../shared/memory/store/memory-store.js';
 
 const MAX_SIZE = 20000;
 
