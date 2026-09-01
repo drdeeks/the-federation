@@ -17,7 +17,7 @@
     "security": "echo 'security scan not configured'",
     "validate": "npm run typecheck && npm run lint && npm test && npm run smoke && npm run security"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
